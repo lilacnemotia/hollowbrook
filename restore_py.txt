@@ -1,0 +1,17 @@
+# Hollowbrook: rebuild the original files from the .txt export.
+# Save this file as restore.py next to MANIFEST.txt, then run:  python restore.py
+# It writes the originals into a folder called "restored" and checks every SHA-256.
+import base64, hashlib, os, sys
+here = os.path.dirname(os.path.abspath(__file__)); out = os.path.join(here, "restored"); bad = 0
+for line in open(os.path.join(here, "MANIFEST.txt"), encoding="utf-8"):
+    if line.startswith("#") or not line.strip(): continue
+    txts, orig, ext, enc, size, sha = line.rstrip("\n").split("\t")
+    parts = [os.path.join(here, *p.split("/")) for p in txts.split(" + ")]
+    blob = b"".join(open(p, "rb").read() for p in parts)
+    data = blob if enc == "raw" else base64.b64decode(blob)
+    dest = os.path.join(out, *orig.split("/")); os.makedirs(os.path.dirname(dest), exist_ok=True)
+    open(dest, "wb").write(data)
+    ok = hashlib.sha256(data).hexdigest() == sha; bad += not ok
+    print(("OK   " if ok else "FAIL ") + orig)
+print("All files restored and verified." if not bad else f"{bad} file(s) did not match their checksum.")
+sys.exit(1 if bad else 0)

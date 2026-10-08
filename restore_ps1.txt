@@ -1,0 +1,19 @@
+# Hollowbrook: rebuild the original files from the .txt export (Windows PowerShell).
+# Save this file as restore.ps1 next to MANIFEST.txt, then in PowerShell run:
+#   powershell -ExecutionPolicy Bypass -File .\restore.ps1
+# It writes the originals into a folder called "restored" and checks every SHA-256.
+$here = Split-Path -Parent $MyInvocation.MyCommand.Path
+$out = Join-Path $here "restored"; $bad = 0
+foreach ($line in Get-Content (Join-Path $here "MANIFEST.txt") -Encoding UTF8) {
+  if ($line.StartsWith("#") -or -not $line.Trim()) { continue }
+  $f = $line.Split("`t"); $txts = $f[0] -split " \+ "; $orig = $f[1]; $enc = $f[3]; $sha = $f[5]
+  $ms = New-Object System.IO.MemoryStream
+  foreach ($p in $txts) { $b = [System.IO.File]::ReadAllBytes((Join-Path $here ($p -replace "/", "\"))); $ms.Write($b, 0, $b.Length) }
+  $bytes = $ms.ToArray()
+  if ($enc -eq "base64") { $bytes = [System.Convert]::FromBase64String([System.Text.Encoding]::ASCII.GetString($bytes)) }
+  $dest = Join-Path $out ($orig -replace "/", "\"); New-Item -ItemType Directory -Force -Path (Split-Path $dest) | Out-Null
+  [System.IO.File]::WriteAllBytes($dest, $bytes)
+  $hash = (Get-FileHash -Algorithm SHA256 $dest).Hash.ToLower()
+  if ($hash -eq $sha) { Write-Host "OK   $orig" } else { Write-Host "FAIL $orig"; $bad++ }
+}
+if ($bad -eq 0) { Write-Host "All files restored and verified." } else { Write-Host "$bad file(s) did not match their checksum." }
