@@ -2,9 +2,10 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Hollowbrook</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@500;600;700;800&family=Atkinson+Hyperlegible+Mono:wght@500;600&display=swap">
+<link rel="stylesheet" href="vendor/fonts/fonts.css">
+
+
+
 <style>
 /* Layout: one pastel notebook. Left page = a window onto the felt village (ambient, provable status). Right page = the Field Journal (all real data). */
 :root{
@@ -446,7 +447,7 @@ html.hc{--ink-soft:#4A3E36;--hairline:#B9A88F}html.hc .ov-sign{border:2px solid 
         <button type="button" data-open="mill">The Mill <span class="kind">model and queue</span></button>
         <button type="button" data-open="residents">Residents <span class="kind">who lives here</span></button>
         <button type="button" id="rerollBtn">Roll a new village <span class="kind">mockup only</span></button>
-        <p class="about">Mockup v7 · sample data; nothing here is a real lookup. Villagers are original characters (no copies of any game's cast). Fonts and the 3D library load from CDNs in this preview only; the real app runs fully offline.</p>
+        <p class="about">Mockup v7 · sample data; nothing here is a real lookup. Villagers are original characters (no copies of any game's cast). Everything, including the 3D library and fonts, is bundled in this folder, so it runs with no internet.</p>
       </div>
       <div class="zoom" role="group" aria-label="Camera">
         <button class="pill" type="button" id="zin" aria-label="Zoom in" title="Zoom in (mouse wheel or +)"><svg class="ico"><use href="#i-plus"/></svg></button>
@@ -488,7 +489,7 @@ html.hc{--ink-soft:#4A3E36;--hairline:#B9A88F}html.hc .ov-sign{border:2px solid 
 <div class="toast" id="toast" hidden></div>
 
 <script type="importmap">
-{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.182.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.182.0/examples/jsm/"}}
+{"imports":{"three":"./vendor/three/build/three.module.js","three/addons/":"./vendor/three/examples/jsm/"}}
 </script>
 <script type="module">
 import * as THREE from 'three';

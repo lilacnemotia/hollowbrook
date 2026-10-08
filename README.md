@@ -6,16 +6,27 @@ A cozy cottagecore village where AI agents live as original animal villagers and
 
 ![Village by day](docs/v7-day.png)
 
-## Run it
+## Run it (works fully offline)
 
-- **Windows:** double-click `Start-Hollowbrook.cmd` (needs Python 3). It serves the `mockup` folder on
-  `127.0.0.1:8765` and opens your browser.
-- **Anything else:** `./start-hollowbrook.sh`, or `cd mockup && python -m http.server 8765` and open
-  `http://localhost:8765/`.
-- Or unzip `dist/hollowbrook-mockup-v7.zip` anywhere and do the same.
+Everything the mockup needs is in this repo, including the 3D library (three.js r182) and fonts in
+`mockup/vendor/`, so it runs on an air-gapped machine with no internet at all.
 
-A local server is needed because the page loads its 3D model packs (`mockup/assets/*.json`).
-The mockup loads three.js and fonts from public CDNs; the real app bundles everything and runs offline.
+**You need:** a modern browser with WebGL 2 (Chrome, Edge, Firefox or Safari from the last few years)
+and Python 3 to serve the folder locally. Python is only a tiny file server; nothing is installed.
+
+- **Windows:** double-click `Start-Hollowbrook.cmd`.
+- **Linux / macOS:** run `./start-hollowbrook.sh`.
+- **By hand:** `cd mockup` then `python3 -m http.server 8765 --bind 127.0.0.1`, and open
+  `http://localhost:8765/` in the browser. Press Ctrl+C in the terminal to stop.
+- **No Python?** Any static file server pointed at `mockup/` works, for example
+  `php -S 127.0.0.1:8765`, `ruby -run -e httpd . -p 8765` or `busybox httpd -f -p 8765`.
+
+To move it to a closed machine, copy `dist/hollowbrook-mockup-v7.zip` (or the whole repo) over on a USB
+stick, unzip it anywhere, and start it as above. The server only listens on this machine
+(`127.0.0.1`), and the page never contacts the internet. Opening `index.html` straight from disk
+(double-clicking it) won't work, because browsers block it from loading the model packs; that's why a
+local server is needed. Settings and your village roll are kept in the browser's local storage.
+
 All data shown is sample data.
 
 ## What's in v7

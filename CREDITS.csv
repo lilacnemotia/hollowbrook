@@ -7,3 +7,5 @@ Free Japan Village pack (farm props),yumeforge.itch.io (owner obtained),Free lic
 Nature Asset / cute plants / woven basket,owner obtained (free; verified by owner),Free licence - verified by owner,"flowers, grass, bushes, lollipop trees, logs, stones (recoloured pastel); cute potted plants; woven basket",mockup/assets/more.json,"Nature Asset recoloured into the Tiny Treats palette; dead trees/pines/big rocks/lavender flower not used"
 All other art (villagers, faces, clothes, ground, cliffs, tower, mill, stall, signs, effects),Hollowbrook (made in code),Original,everything else,mockup/hollowbrook-mockup.html,
 Music,Hollowbrook (made in code),"Original (Brookside, Meadow Waltz); Prelude in C BWV 846 by J.S. Bach (public domain)",music player,mockup/hollowbrook-mockup.html,no audio files
+three.js r182,three.js authors (threejs.org),MIT,3D rendering (bundled for offline use),mockup/vendor/three/,LICENSE included
+"Fredoka, Nunito, Atkinson Hyperlegible Mono",Google Fonts via Fontsource,SIL Open Font License 1.1,interface fonts (bundled for offline use),mockup/vendor/fonts/,licence files included
