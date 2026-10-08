@@ -2,11 +2,30 @@
 
 A cozy cottagecore village where AI agents live as original animal villagers and do real work
 (data aggregation, CVE lookups, "am I affected?" checks) on local models. This repo holds the
-**interactive mockup (v7)**. The real desktop app is built after the plan is approved.
+**interactive mockup (v0.7)**, packaged as a Windows app. Data shown is sample data; the AI agents are
+wired up in the next build phase.
 
 ![Village by day](docs/v7-day.png)
 
-## Run it (works fully offline)
+## Windows app (.exe)
+
+**Download:** [`windows/Hollowbrook-0.7.0-portable.exe`](windows/Hollowbrook-0.7.0-portable.exe)
+(about 98 MB). Checksum in `windows/SHA256SUMS.txt`.
+
+- Portable: no installer, no admin rights, nothing else to install (no Python, no browser). Copy the
+  .exe anywhere, including a USB stick to an offline machine, and double-click it.
+- Runs fully offline in its own window. The app blocks every network request, so it never contacts the
+  internet.
+- Needs Windows 10 or 11, 64-bit. It uses your graphics card when it can and falls back to software
+  3D on machines without one (slower).
+- The first launch takes a few seconds while it unpacks. Settings and your village roll are saved in
+  `%APPDATA%\Hollowbrook`.
+- It isn't code-signed, so Windows SmartScreen may say "Windows protected your PC". Click
+  **More info**, then **Run anyway**.
+- The app source is in `app/` (Electron shell around the `mockup/` page). Build it with
+  `cd app && npm install && npm run dist:win`.
+
+## Run it in a browser instead (also offline)
 
 Everything the mockup needs is in this repo, including the 3D library (three.js r182) and fonts in
 `mockup/vendor/`, so it runs on an air-gapped machine with no internet at all.

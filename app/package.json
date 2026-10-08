@@ -1,0 +1,54 @@
+{
+  "name": "hollowbrook",
+  "productName": "Hollowbrook",
+  "version": "0.7.0",
+  "description": "Hollowbrook - a cozy village of AI helper villagers (mockup build, sample data)",
+  "author": "Hollowbrook",
+  "license": "UNLICENSED",
+  "private": true,
+  "main": "main.js",
+  "scripts": {
+    "copy-web": "node scripts/copy-web.js",
+    "start": "npm run copy-web && electron .",
+    "dist:win": "npm run copy-web && electron-builder --win portable --x64"
+  },
+  "devDependencies": {
+    "electron": "43.7.3",
+    "electron-builder": "26.16.1"
+  },
+  "build": {
+    "appId": "app.hollowbrook.mockup",
+    "productName": "Hollowbrook",
+    "directories": {
+      "output": "release",
+      "buildResources": "build"
+    },
+    "files": [
+      "main.js",
+      "preload.js",
+      "web/**/*",
+      "build/icon.png",
+      "package.json"
+    ],
+    "asar": true,
+    "win": {
+      "icon": "build/icon.ico",
+      "target": [
+        "portable"
+      ],
+      "signAndEditExecutable": true
+    },
+    "portable": {
+      "artifactName": "Hollowbrook-${version}-portable.exe"
+    },
+    "artifactName": "Hollowbrook-${version}-win-x64.${ext}",
+    "electronLanguages": [
+      "en-US"
+    ],
+    "compression": "maximum"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lilacnemotia/hollowbrook.git"
+  }
+}
