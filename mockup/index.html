@@ -238,6 +238,17 @@ button,input{font:inherit;color:inherit}
 .vw-form{display:flex;gap:8px;padding:10px 12px;border-top:1px solid var(--hairline);background:var(--surface-1)}
 .vw-form input{flex:1;min-width:0;border:1px solid var(--input-edge);border-radius:var(--r-pill);background:var(--surface-2);padding:8px 14px;font:600 var(--fs-15)/1.4 var(--f-body);color:var(--ink)}
 .vw-form input::placeholder{color:var(--ink-soft);opacity:1}
+.vw-form{flex-wrap:wrap}
+.aichip{flex:1 0 100%;font:700 11px/1.2 var(--f-body);color:var(--ink-soft);display:flex;align-items:center;gap:6px;margin:-2px 2px 2px}
+.aichip::before{content:'';width:7px;height:7px;border-radius:50%;background:#C9BFB4}
+.aichip[data-on="1"]::before{background:#5DBB63;box-shadow:0 0 0 3px rgba(93,187,99,.2)}
+.msg .bubcol{display:flex;flex-direction:column;gap:4px;min-width:0}
+.msg.them .bubcol>p{background:var(--surface-1);border:1px solid var(--hairline);border-bottom-left-radius:6px}
+.tk{margin:0;font:500 var(--fs-12)/1.45 var(--f-body);color:var(--ink-soft)}
+.tk summary{cursor:pointer;font-weight:700;list-style:none;display:inline-flex;align-items:center;gap:5px;padding:2px 8px;border-radius:var(--r-pill);background:color-mix(in srgb,var(--np) 40%,transparent);color:var(--np-ink)}
+.tk summary::-webkit-details-marker{display:none}
+.tk p{margin:5px 0 0;padding:7px 10px;border-left:2px solid color-mix(in srgb,var(--np-ink) 35%,transparent);font-style:italic;white-space:pre-wrap;max-height:160px;overflow:auto}
+.dots3{display:flex;gap:4px;padding:12px 14px!important}.dots3 i{width:6px;height:6px;border-radius:50%;background:var(--ink-soft);animation:vbob 1s infinite}.dots3 i:nth-child(2){animation-delay:.15s}.dots3 i:nth-child(3){animation-delay:.3s}
 .app.vwin-open .zoom{left:calc(min(430px,36%) + 28px)}
 .app.vwin-open .dock{display:none}
 .resname{display:inline-flex;align-items:center;border:0;background:transparent;padding:0;cursor:pointer;color:var(--ink);font:inherit;text-align:left}
@@ -409,7 +420,7 @@ html.hc{--ink-soft:#4A3E36;--hairline:#B9A88F}html.hc .ov-sign{border:2px solid 
 <div class="app" id="app">
   <div class="titlebar">
     <svg width="18" height="18" viewBox="0 0 34 34" aria-hidden="true"><circle cx="17" cy="17" r="16" fill="#C8E2A8"/><path d="M7 19.5 Q17 7 27 19.5 Z" fill="#E0957F"/><rect x="10" y="18.5" width="14" height="9" rx="3.5" fill="#FBF0DC"/><circle cx="17" cy="23" r="2.2" fill="#D3A77C"/></svg>
-    <span class="tb-name">Hollowbrook</span><span class="tb-sub">· Mockup v7 · sample data</span><span class="tb-sp"></span>
+    <span class="tb-name">Hollowbrook</span><span class="tb-sub">· Mockup v8 · sample data</span><span class="tb-sp"></span>
     <div class="winctl" aria-hidden="true"><span><svg viewBox="0 0 10 10"><path d="M1 5h8"/></svg></span><span><svg viewBox="0 0 10 10"><rect x="1.5" y="1.5" width="7" height="7" rx="1"/></svg></span><span><svg viewBox="0 0 10 10"><path d="M1.5 1.5l7 7M8.5 1.5l-7 7"/></svg></span></div>
   </div>
   <main class="stage" id="stage">
@@ -447,7 +458,7 @@ html.hc{--ink-soft:#4A3E36;--hairline:#B9A88F}html.hc .ov-sign{border:2px solid 
         <button type="button" data-open="mill">The Mill <span class="kind">model and queue</span></button>
         <button type="button" data-open="residents">Residents <span class="kind">who lives here</span></button>
         <button type="button" id="rerollBtn">Roll a new village <span class="kind">mockup only</span></button>
-        <p class="about">Mockup v7 · sample data; nothing here is a real lookup. Villagers are original characters (no copies of any game's cast). Everything, including the 3D library and fonts, is bundled in this folder, so it runs with no internet.</p>
+        <p class="about">Mockup v8 · sample data; nothing here is a real lookup. Villagers are original characters (no copies of any game's cast). Everything, including the 3D library and fonts, is bundled in this folder, so it runs with no internet.</p>
       </div>
       <div class="zoom" role="group" aria-label="Camera">
         <button class="pill" type="button" id="zin" aria-label="Zoom in" title="Zoom in (mouse wheel or +)"><svg class="ico"><use href="#i-plus"/></svg></button>
@@ -474,7 +485,7 @@ html.hc{--ink-soft:#4A3E36;--hairline:#B9A88F}html.hc .ov-sign{border:2px solid 
       <details class="vw-card" id="vwCard" open></details>
       <div class="vw-state"><span class="dot"></span><span id="vwState"></span></div>
       <div class="vw-chat" id="vwChat" role="log" aria-live="polite"></div>
-      <form class="vw-form" id="vwForm" autocomplete="off"><input id="vwText" aria-label="Message to this villager"><button class="btn btn--primary btn--sm" type="submit">Send</button></form>
+      <form class="vw-form" id="vwForm" autocomplete="off"><span class="aichip" id="vwAI" data-on="0">…</span><input id="vwText" aria-label="Message to this villager"><button class="btn btn--primary btn--sm" type="submit">Send</button></form>
     </aside>
     <div class="ctx" id="ctx" role="menu" hidden></div>
     <div class="palette" id="palette" hidden><div class="pal-card" role="dialog" aria-label="Find anything"><div class="pal-in"><svg class="ico"><use href="#i-search"/></svg><input id="palq" placeholder="Find a building, villager, action or CVE…" aria-label="Find" role="combobox" aria-controls="pallist" aria-expanded="true" autocomplete="off"><kbd>Esc</kbd></div><ul id="pallist" role="listbox"></ul><div class="pal-foot"><span><kbd>↑</kbd><kbd>↓</kbd> move</span><span><kbd>Enter</kbd> open</span><span><kbd>Esc</kbd> close</span></div></div></div>
@@ -826,7 +837,7 @@ function instKit(name,list){const src=KIT[name];if(!src)return false;src.updateM
  const m4=new THREE.Matrix4(),q=new THREE.Quaternion(),e=new THREE.Euler();
  for(const me of meshes){const local=new THREE.Matrix4().multiplyMatrices(inv,me.matrixWorld);const im=new THREE.InstancedMesh(me.geometry,bentMat(me.material),list.length);
   list.forEach(([x,y,z,s,ry],i)=>{q.setFromEuler(e.set(0,ry,0));m4.compose(new THREE.Vector3(x,y,z),q,new THREE.Vector3(s,s,s)).multiply(local);im.setMatrixAt(i,m4);});
-  im.castShadow=true;im.receiveShadow=true;im.frustumCulled=false;world.add(im);}return true;}
+  im.castShadow=true;im.receiveShadow=true;im.frustumCulled=false;im.userData.kit=name;world.add(im);}return true;}
 // obstacles the villagers walk around (filled in as the village is built)
 const OBST=[];const obRect=(x,z,hw,hd)=>OBST.push({r:1,x,z,hw,hd});const obCirc=(x,z,r)=>OBST.push({r:0,x,z,rad:r});
 // Tiny Treats house, recoloured per building by repainting its gradient-atlas swatches
@@ -1056,12 +1067,17 @@ function decorateMore(){const D=k=>B[k]&&B[k].g&&B[k].g.userData.dims;
    const tb=put('Bathtub',h.x+1.6,fz+.62,.62,-.15);if(tb){const ty=topY(tb,h.x+1.6,fz+.62,.4)-.06;put('Water_Lettuce_3',h.x+1.45,fz+.6,.75,0,world,ty);put('Water_Lily_Blossom_2',h.x+1.8,fz+.66,.55,0,world,ty);put('Water_Hyacinth_1',h.x+1.75,fz+.5,.55,0,world,ty);}
    put('pot_B_small',h.x-.95,fz+.95,.4);put('pot_D_medium',h.x-2.25,fz+1.05,.32);put('succulent_C',h.x-2.25,fz+1.05,.3,0,world,.24);put('watering_can_B',h.x+.95,fz+1.05,.3,2.2);}}
  // --- bakery stall north of the plaza: kit tables, every kind of baked good, a striped canopy ---
- {const X=2.6,Z=-6.5;const t=put('MarketStall_Table_Tiered',X,Z,.8,Math.PI);const t2=put('MarketStall_Table_Flat',X+1.75,Z+.1,1.15,Math.PI/2);
-  const goods=['cake_birthday_cut','pie_cherry_cut','bread','baguette','cake_chocolate_cut','croissant','pie_apple_cut','cinnamon_roll','donut_pink','waffle_stacked','cake_strawberry_cut','muffin','bread_half','donut_chocolate','cupcake'];
-  const gs={cake_birthday_cut:.3,cake_chocolate_cut:.3,cake_strawberry_cut:.3,pie_cherry_cut:.36,pie_apple_cut:.36,bread:.42,baguette:.34,bread_half:.42,waffle_stacked:.42,croissant:.45,cinnamon_roll:.48,donut_pink:.5,donut_chocolate:.5,muffin:.5,cupcake:.48};
-  let i=0;if(t)for(const dz of[-.32,.0,.32])for(const dx of[-.85,-.28,.28,.85]){const n=goods[i++%goods.length];putOn(t,n,X+dx,Z+dz,gs[n]||.4,rnd()*.6-.3);}
-  if(t2){for(const [n,dz,s] of [['bread_roll',-.25,.5],['cookie',.05,.55],['Sweets_RiceDumpling_Spring',.3,.75],['Sweets_RiceDumpling_SoySauce',.38,.75],['donut',-.05,.55]])putOn(t2,n,X+1.75+(rnd()-.5)*.2,Z+.1+dz,s,rnd()*6);}
-  obRect(X+.35,Z,1.75,.8);
+ {const X=2.6,Z=-6.5;// a painted three-step display counter, goods on every step (heights known, so nothing sinks into the table)
+  const CX=X+.35,cream=mat('#FFF1DF',plankTex),pink=mat('#F4A7B9'),trim=mat('#C98A5E',plankTex);
+  mk(RB(2.7,.6,1.05,.05,3),cream,world,[CX,.3,Z+.12]);mk(RB(2.74,.08,1.09,.03,2),trim,world,[CX,.62,Z+.12]);for(let i=0;i<5;i++)mk(RB(.42,.34,.03,.02,2),pink,world,[CX-1.08+i*.54,.3,Z+.66]);
+  mk(RB(2.5,.24,.5,.04,3),cream,world,[CX,.78,Z-.12]);mk(RB(2.3,.24,.32,.04,3),cream,world,[CX,1.02,Z-.3]);
+  const row=(y,z,list)=>list.forEach(([n,sc],i)=>{const x=CX-1.05+i*(2.1/(list.length-1));put(n,x,z,sc,(i%2?.3:-.3),world,y);});
+  row(.66,Z+.36,[['cake_birthday_cut',.36],['pie_cherry_cut',.42],['cake_chocolate_cut',.36],['pie_apple_cut',.42],['cake_strawberry_cut',.36]]);
+  row(.9,Z-.05,[['bread',.5],['croissant',.6],['cinnamon_roll',.6],['baguette',.42],['waffle_stacked',.5],['bread_half',.5]]);
+  row(1.14,Z-.3,[['cupcake',.6],['donut_pink',.62],['muffin',.6],['donut_chocolate',.62],['cupcake',.6],['cookie',.7]]);
+  const t2=put('MarketStall_Table_Flat',X+2.1,Z+.15,1.25,Math.PI/2);if(t2){const ty=topY(t2,X+2.1,Z+.15,.62);const bs=put('Basket_L',X+2.1,Z+.15,.55,0,world,ty);if(bs){for(const [n,dz,s2] of [['baguette_half',-.12,.4],['bread_roll',.1,.55],['bread_slice',.0,.5]])put(n,X+2.1+(rnd()-.5)*.12,Z+.15+dz,s2,rnd()*6,world,ty+.06);}
+   for(const [n,dz,s2] of [['Sweets_RiceDumpling_Spring',-.35,.85],['Sweets_RiceDumpling_SoySauce',.45,.85],['donut',.3,.6]])put(n,X+2.1,Z+.15+dz,s2,rnd()*6,world,ty);}
+  obRect(X+.35+.35,Z+.1,2.1,.7);
   // canopy
   const stripe=canvasTex(256,64,(g,w,h)=>{for(let i=0;i<8;i++){g.fillStyle=i%2?'#FFF4E6':'#F4A7B9';g.fillRect(i*w/8,0,w/8,h);}});const cm=mat('#FFFFFF',stripe,{rough:.8});const pm=mat('#C98A5E',plankTex);
   for(const [px,pz] of [[-1.3,-.7],[1.3,-.7],[-1.3,.7],[1.3,.7]])mk(CYL(.045,.05,2.1,10),pm,world,[X+.35+px*1.05,1.05,Z+pz],[1,1,1],[0,0,0]);
@@ -1093,11 +1109,11 @@ function decorateMore(){const D=k=>B[k]&&B[k].g&&B[k].g.userData.dims;
   const spots=[[-12.7,2.5],[-7.9,2.6],[-9.9,9.1],[-5.4,8.1],[-1.6,8.0],[3.9,8.9],[6.0,7.4],[-8.6,-1.5],[-3.6,-1.4],[.9,-4.9],[6.8,-3.1],[10.6,.2],[-14.2,6.0],[-2.2,3.2]];
   spots.forEach(([x,z],i)=>instKit(PB[i%PB.length],[[x,0,z,1.3,rnd()*6],[x+.25,0,z+.18,1.0,rnd()*6]]));}
  // river life: tubs and pots at the fishing spots, driftwood and reeds on the far bank, frogs on lily pads
- {put('Wooden_Tub',10.55,-6.55,1.2,.3);put('Metal_Tub',10.5,3.3,1.1,.8);put('Clay_Pot',10.6,8.55,1.3,0);put('Branch_1a',16.9,-6.2,1.0,.4);put('Branch_3a',17.1,2.6,1.0,2.2);put('Branch_2b',16.8,8.1,1.0,1.1);
+ {put('Wooden_Tub',10.6,-6.7,.42,.3);put('Metal_Tub',10.55,3.2,.45,.8);put('Clay_Pot',10.6,8.5,.8,0);put('Branch_1a',16.9,-6.2,1.0,.4);put('Branch_3a',17.1,2.6,1.0,2.2);put('Branch_2b',16.8,8.1,1.0,1.1);
   for(const [x,z] of [[10.55,-6.55],[10.5,3.3],[10.6,8.55]])obCirc(x,z,.32);
   const W=[['Long_Grass_Patch_2',16.5,-8.4,1],['Short_Grass_Patch_2',16.6,-.6,1],['Mini_Plant_1',16.4,5.6,1.2],['Mini_Plant_2',16.5,-3.4,1.2],['Mini_Plant_3',16.6,10.2,1.2],['CatTail_3',16.3,4.2,.6],['Swamp_Calla_3',16.3,-5.0,.7],['Water_Mint_3',12.2,6.6,.7],['Water_Hyacinth_2',12.3,-7.6,.6],['Water_Hyacinth_3',16.2,7.0,.6]];
   for(const [n,x,z,s] of W)put(n,x,z,s,rnd()*6);
-  for(const [x,z,f] of [[13.3,-4.3,'Frog_2'],[15.2,6.4,'Frog_2']]){put('Water_Lily_Leaf_4',x,z,.7,rnd()*6,world,-.33);put(f,x,z,1.3,rnd()*6,world,-.31);}
+  for(const [x,z] of [[13.3,-4.3],[15.2,6.4]]){const lf=put('Water_Lily_Leaf_4',x,z,.8,rnd()*6,world,-.37);if(lf){const bb=new THREE.Box3().setFromObject(lf),c=bb.getCenter(new THREE.Vector3());put('Frog_2',c.x,c.z,1.3,rnd()*6,world,bb.max.y-.01);}}
   put('Water_Lily_Blossom_3',13.9,-4.0,.6,0,world,-.32);put('Water_Lettuce_3',14.8,9.5,.7,0,world,-.33);put('Frog_2',-5.4,-9.6,1.2,2.4,world,.1);}
 }
 function moreTick(){const n=SUN.night;for(const s of MORE_GLOW)s.material.opacity=n*.95;if(plumMat)plumMat.emissiveIntensity=.42*(1-n*.85);}
@@ -1300,7 +1316,7 @@ function snoutTexture(col,kind,mouth){const W=512,H=256,c=mkCanvas(W,H),g=c.getC
    if(mouth==='o'){g.fillStyle='#7A3E3E';g.beginPath();g.ellipse(X(0),Y(-22),8,10,0,0,7);g.fill();}
    else{g.moveTo(X(-24),Y(-6));g.quadraticCurveTo(X(-12),Y(-22),X(0),Y(-12));g.quadraticCurveTo(X(12),Y(-22),X(24),Y(-6));g.stroke();}}
   const t=new THREE.CanvasTexture(c);t.colorSpace=THREE.SRGBColorSpace;t.anisotropy=8;return t;}
-function pigCapTex(col){return canvasTex(128,128,(g,w,h)=>{g.fillStyle=col;g.fillRect(0,0,w,h);g.fillStyle='rgba(110,55,55,.7)';for(const s of[-1,1]){g.beginPath();g.ellipse(64+s*22,64,9,14,0,0,7);g.fill();}});}
+function pigCapTex(col){return canvasTex(128,128,(g,w,h)=>{g.fillStyle=col;g.fillRect(0,0,w,h);g.fillStyle='rgba(110,55,55,.7)';for(const s of[-1,1]){g.beginPath();g.ellipse(64,64+s*22,14,9,0,0,7);g.fill();}});}
 function lcg(seed){let s=(seed>>>0)||1;return()=>{s=(s*1664525+1013904223)>>>0;return s/4294967296;};}
 const FAB={knit:'knit',cable:'knit',fairisle:'knit',vest:'knit',stripes:'knit',dots:'jersey',heart:'jersey',star:'jersey',sailor:'jersey',floral:'woven',gingham:'woven',plaid:'woven',patch:'woven',apron:'woven',overalls:'denim',corduroy:'cord'};
 function shirtTexture(spec){const W=512,H=256,c=mkCanvas(W,H),g=c.getContext('2d'),bc=mkCanvas(W,H),b=bc.getContext('2d');
@@ -1426,7 +1442,7 @@ function buildVillager(spec){
   if(k.snout==='cow')snoutAt([.52,.3,.32],[0,-.36,.78],'#F2C7BC');
   if(k.snout==='bill'){snoutAt([.42,.12,.42],[0,-.2,.9],k.bill);mk(S1,mat(shade(k.bill,-.08),null,{rough:.6}),head,[0,-.31*R,.84*R],[.34*R,.08*R,.32*R]);}
   if(k.snout==='koala'){mk(S1,mat('#4A3D3D',null,{rough:.45}),head,[0,-.1*R,.95*R],[.2*R,.27*R,.16*R]);mk(SPH(1,12,8),whiteMat,head,[.06*R,.02*R,1.08*R],[.04*R,.06*R,.02*R],[0,0,0],false);}
-  if(k.snout==='pig'){const pm=plushMat(shade(k.fur,-.05));const pc=texMat(pigCapTex(shade(k.fur,-.07)));mk(CYL(.22*R,.24*R,.2*R,28),[pm,pc,pc],head,[0,-.16*R,.98*R],[1,1,1],[Math.PI/2,0,0]);}
+  if(k.snout==='pig'){const pm=plushMat(shade(k.fur,-.05));const pc=texMat(pigCapTex(shade(k.fur,-.07)));mk(CYL(.22*R,.24*R,.2*R,28),[pm,pc,pc],head,[0,-.16*R,.98*R],[1.2,1,.84],[Math.PI/2,0,0]);}
   if(k.snout==='trunk'){const cvT=new THREE.CatmullRomCurve3([new THREE.Vector3(0,-.05,.86),new THREE.Vector3(0,-.32,1.12),new THREE.Vector3(0,-.6,1.2),new THREE.Vector3(0,-.68,1.36),new THREE.Vector3(0,-.6,1.5)].map(v=>v.multiplyScalar(R)));mk(new THREE.TubeGeometry(cvT,24,.11*R,14),fur,head,[0,0,0]);mk(SPH(1,16,12),fur,head,[0,-.6*R,1.5*R],[.11*R,.11*R,.11*R]);}
   if(k.frog)for(const s of[-1,1]){const p=placeOnHead(s*26,42,R,.95);mk(SPH(1,24,16),fur,head,[p.x,p.y,p.z],[R*.32,R*.3,R*.3]);mk(SPH(1,20,14),whiteMat,head,[p.x,p.y+R*.03,p.z+R*.17],[R*.22,R*.22,R*.12],[0,0,0],false);mk(SPH(1,14,10),inkMat,head,[p.x,p.y+R*.04,p.z+R*.27],[R*.12,R*.14,R*.06],[0,0,0],false);mk(SPH(1,8,6),whiteMat,head,[p.x+R*.04,p.y+R*.09,p.z+R*.31],[R*.035,R*.04,R*.02],[0,0,0],false);}
   // ears
@@ -1486,31 +1502,45 @@ CORE.forEach(c=>{const h=B[c.home];spawn(c,h.door.x+(rnd()-.5)*1.6,h.door.z+.2+r
 
 /* ======================= movement + jobs ======================= */
 /* ======================= walking: a grid of free ground, A* paths around buildings, props and water ======================= */
+// every free-standing prop becomes an obstacle too (gates, arches and overhead things stay walk-through)
+{const WALK=/gate|ToriGate|arch|cobblestones|doormat|floor_base|letter|n_Flower|n_Grass|Grass_Patch|Water_|Lily|Pebble/i;const bb=new THREE.Box3(),sz=new THREE.Vector3(),ct=new THREE.Vector3();world.updateMatrixWorld(true);
+ const inObst=(x,z)=>OBST.some(o=>o.r?Math.abs(x-o.x)<o.hw&&Math.abs(z-o.z)<o.hd:Math.hypot(x-o.x,z-o.z)<o.rad);let added=0;
+ const _m=new THREE.Matrix4(),_p=new THREE.Vector3(),_q=new THREE.Quaternion(),_s=new THREE.Vector3(),done=new Set();
+ for(const c of world.children){if(c.isInstancedMesh&&/foliage|Pebble|Rock|Bush/.test(c.userData.kit||'')&&!done.has(c.userData.kit)){done.add(c.userData.kit);c.geometry.computeBoundingBox();const gs=c.geometry.boundingBox.getSize(new THREE.Vector3());
+   for(let k=0;k<c.count;k++){c.getMatrixAt(k,_m);_m.decompose(_p,_q,_s);const rr=Math.max(gs.x*_s.x,gs.z*_s.z)/2*.8;if(rr>.06&&!inObst(_p.x,_p.z)){obCirc(_p.x,_p.z,rr);added++;}}continue;}
+  if(c.userData.walk||c.isInstancedMesh||c.isSprite||c.isPoints||c.isLine||V.some(v=>v.root===c))continue;const nm=(c.children[0]&&c.children[0].name)||c.name||'';if(WALK.test(nm))continue;
+  bb.setFromObject(c);if(bb.isEmpty())continue;bb.getSize(sz);bb.getCenter(ct);
+  if(sz.y<.22||bb.min.y>.45||Math.max(sz.x,sz.z)>3.4||Math.min(sz.x,sz.z)<.06)continue;if(ct.x<-19||ct.x>11.7||ct.z<-10.6||ct.z>12.1)continue;
+  if(inObst(ct.x,ct.z)&&Math.max(sz.x,sz.z)<1.2)continue;obRect(ct.x,ct.z,sz.x/2*.82,sz.z/2*.82);added++;}
+ window.HB_AUTO_OBST=added;}
 const NAV={x0:-19,z0:-10.6,x1:11.7,z1:12.1,c:.35};NAV.w=Math.ceil((NAV.x1-NAV.x0)/NAV.c);NAV.h=Math.ceil((NAV.z1-NAV.z0)/NAV.c);NAV.g=new Uint8Array(NAV.w*NAV.h);
-{const pad=.22;for(let j=0;j<NAV.h;j++)for(let i=0;i<NAV.w;i++){const x=NAV.x0+(i+.5)*NAV.c,z=NAV.z0+(j+.5)*NAV.c;let b=0;
+{const pad=.34;for(let j=0;j<NAV.h;j++)for(let i=0;i<NAV.w;i++){const x=NAV.x0+(i+.5)*NAV.c,z=NAV.z0+(j+.5)*NAV.c;let b=0;
   for(const o of OBST){if(o.r){if(Math.abs(x-o.x)<o.hw+pad&&Math.abs(z-o.z)<o.hd+pad){b=1;break;}}else if(Math.hypot(x-o.x,z-o.z)<o.rad+pad){b=1;break;}}NAV.g[j*NAV.w+i]=b;}}
 const cellOf=(x,z)=>[Math.max(0,Math.min(NAV.w-1,Math.floor((x-NAV.x0)/NAV.c))),Math.max(0,Math.min(NAV.h-1,Math.floor((z-NAV.z0)/NAV.c)))];
 const freeAt=(i,j)=>i>=0&&j>=0&&i<NAV.w&&j<NAV.h&&!NAV.g[j*NAV.w+i];
 const cellPos=(i,j)=>({x:NAV.x0+(i+.5)*NAV.c,z:NAV.z0+(j+.5)*NAV.c});
 function nearestFree(i,j){if(freeAt(i,j))return[i,j];for(let r=1;r<20;r++)for(let dj=-r;dj<=r;dj++)for(let di=-r;di<=r;di++){if(Math.max(Math.abs(di),Math.abs(dj))!==r)continue;if(freeAt(i+di,j+dj))return[i+di,j+dj];}return[i,j];}
 function lineFree(a,b){const d=Math.hypot(b.x-a.x,b.z-a.z),n=Math.ceil(d/(NAV.c*.5));for(let k=1;k<n;k++){const t=k/n;const [i,j]=cellOf(a.x+(b.x-a.x)*t,a.z+(b.z-a.z)*t);if(!freeAt(i,j))return false;}return true;}
-function findPath(from,to){let [si,sj]=nearestFree(...cellOf(from.x,from.z)),[gi,gj]=nearestFree(...cellOf(to.x,to.z));const W=NAV.w,N=W*NAV.h,s=sj*W+si,goal=gj*W+gi;
- const gS=new Float32Array(N).fill(1e9),came=new Int32Array(N).fill(-1),open=[s],inO=new Uint8Array(N),closed=new Uint8Array(N);gS[s]=0;inO[s]=1;const fS=new Float32Array(N).fill(1e9);
- const h=k=>{const dx=Math.abs(k%W-gi),dz=Math.abs(((k/W)|0)-gj);return Math.max(dx,dz)+.414*Math.min(dx,dz);};fS[s]=h(s);let iter=0;
- while(open.length&&iter++<20000){let bi=0;for(let q=1;q<open.length;q++)if(fS[open[q]]<fS[open[bi]])bi=q;const cur=open[bi];open.splice(bi,1);inO[cur]=0;if(cur===goal)break;closed[cur]=1;const ci=cur%W,cj=(cur/W)|0;
-  for(let dj=-1;dj<=1;dj++)for(let di=-1;di<=1;di++){if(!di&&!dj)continue;const ni=ci+di,nj=cj+dj;if(!freeAt(ni,nj))continue;if(di&&dj&&(!freeAt(ci+di,cj)||!freeAt(ci,cj+dj)))continue;const nk=nj*W+ni;if(closed[nk])continue;
-   const ng=gS[cur]+(di&&dj?1.414:1);if(ng<gS[nk]){gS[nk]=ng;came[nk]=cur;fS[nk]=ng+h(nk);if(!inO[nk]){open.push(nk);inO[nk]=1;}}}}
- if(came[goal]<0&&goal!==s)return[{x:to.x,z:to.z}];const cells=[];for(let k=goal;k!==-1;k=came[k])cells.push(k);cells.reverse();
- const pts=cells.map(k=>cellPos(k%W,(k/W)|0));pts[pts.length-1]={x:to.x,z:to.z};
- const out=[];let a={x:from.x,z:from.z},k=0;while(k<pts.length-1){let m=pts.length-1;while(m>k+1&&!lineFree(a,pts[m]))m--;out.push(pts[m]);a=pts[m];k=m;}if(!out.length)out.push({x:to.x,z:to.z});return out;}
+function findPath(from,to){const g0=cellOf(to.x,to.z);const [gi,gj]=nearestFree(...g0);const end=to.exact||freeAt(...g0)?{x:to.x,z:to.z}:cellPos(gi,gj);
+ // first try only free ground; if the villager is boxed in, allow stepping over blocked cells at a high cost so they never cut straight through a house
+ let cells=astar(nearestFree(...cellOf(from.x,from.z)),[gi,gj],false);if(!cells)cells=astar(cellOf(from.x,from.z),[gi,gj],true);if(!cells)return[end];
+ const W=NAV.w;const pts=cells.map(k=>cellPos(k%W,(k/W)|0));pts[pts.length-1]=end;
+ const out=[];let a={x:from.x,z:from.z},k=0;while(k<pts.length-1){let m=pts.length-1;while(m>k+1&&!lineFree(a,pts[m]))m--;out.push(pts[m]);a=pts[m];k=m;}if(!out.length)out.push(end);return out;}
+function astar([si,sj],[gi,gj],soft){const W=NAV.w,N=W*NAV.h,s=sj*W+si,goal=gj*W+gi;const ok=(i,j)=>i>=0&&j>=0&&i<NAV.w&&j<NAV.h&&(soft||!NAV.g[j*W+i]);
+ const gS=new Float32Array(N).fill(1e9),came=new Int32Array(N).fill(-1),open=[s],inO=new Uint8Array(N),closed=new Uint8Array(N),fS=new Float32Array(N).fill(1e9);gS[s]=0;inO[s]=1;
+ const h=k=>{const dx=Math.abs(k%W-gi),dz=Math.abs(((k/W)|0)-gj);return Math.max(dx,dz)+.414*Math.min(dx,dz);};fS[s]=h(s);let iter=0,found=s===goal;
+ while(open.length&&iter++<30000){let bi=0;for(let q=1;q<open.length;q++)if(fS[open[q]]<fS[open[bi]])bi=q;const cur=open[bi];open.splice(bi,1);inO[cur]=0;if(cur===goal){found=true;break;}closed[cur]=1;const ci=cur%W,cj=(cur/W)|0;
+  for(let dj=-1;dj<=1;dj++)for(let di=-1;di<=1;di++){if(!di&&!dj)continue;const ni=ci+di,nj=cj+dj;if(!ok(ni,nj))continue;if(di&&dj&&(!ok(ci+di,cj)||!ok(ci,cj+dj)))continue;const nk=nj*W+ni;if(closed[nk])continue;
+   const ng=gS[cur]+(di&&dj?1.414:1)+(soft&&NAV.g[nk]?20:0);if(ng<gS[nk]){gS[nk]=ng;came[nk]=cur;fS[nk]=ng+h(nk);if(!inO[nk]){open.push(nk);inO[nk]=1;}}}}
+ if(!found)return null;const cells=[];for(let k=goal;k!==-1;k=came[k])cells.push(k);return cells.reverse();}
 function routeTo(v,t,cb,state='walking'){if(v.state==='sleeping'){wakeUp(v,()=>routeTo(v,t,cb,state));return;}v.path=findPath(v,t);v.onArrive=cb||null;v.state=state;v.chore=null;dropTool(v);}
 
 /* ======================= doors, sleeping and waking ======================= */
 function doorTick(dt){for(const k in B){const b=B[k];if(!b.doorObj)continue;b.doorOpen+=((b.doorWant?1:0)-b.doorOpen)*Math.min(1,dt*7);b.doorObj.rotation.y=(b.doorObj.userData.base||0)+(b.doorObj.userData.dir===-1?1.35:-1.35)*b.doorOpen;}}
 function homeOf(v){return B[v.home]&&B[v.home].doorC?B[v.home]:B.hall;}
-function goSleep(v){const b=homeOf(v);if(!b)return;routeTo(v,{x:b.door.x,z:b.door.z},()=>{b.doorWant++;v.state='entering';v.bubble='';
+function goSleep(v){const b=homeOf(v);if(!b)return;routeTo(v,{x:b.door.x,z:b.door.z,exact:true},()=>{b.doorWant++;v.state='entering';v.bubble='';
   setTimeout(()=>{v.path=[{x:b.doorC.x,z:b.doorC.z+.3},{x:b.doorC.x,z:b.doorC.z-.7}];v.onArrive=()=>{v.root.visible=false;v.state='sleeping';b.sleepers++;sfx.door();setTimeout(()=>{b.doorWant=Math.max(0,b.doorWant-1);},350);updateResidents();};},300);});}
-function wakeUp(v,cb){const b=homeOf(v);if(v.state!=='sleeping'||!b){cb&&cb();return;}b.sleepers=Math.max(0,b.sleepers-1);b.doorWant++;sfx.door();v.x=b.doorC.x;v.z=b.doorC.z-.7;v.yaw=0;v.state='waking';
+function wakeUp(v,cb){const b=homeOf(v);if(v.state!=='sleeping'||!b){cb&&cb();return;}const now=performance.now(),at=Math.max(now,b.nextWake||0);b.nextWake=at+1100;if(at>now+5){v.state='sleeping';setTimeout(()=>{if(v.state==='sleeping'){b.nextWake=Math.min(b.nextWake,performance.now());wakeUp(v,cb);}},at-now);return;}b.sleepers=Math.max(0,b.sleepers-1);b.doorWant++;sfx.door();v.x=b.doorC.x;v.z=b.doorC.z-.7;v.yaw=0;v.state='waking';
  setTimeout(()=>{v.root.visible=true;v.path=[{x:b.doorC.x,z:b.doorC.z+.4},{x:b.door.x,z:b.door.z}];v.onArrive=()=>{setTimeout(()=>{b.doorWant=Math.max(0,b.doorWant-1);},200);v.state='idle';v.idleSince=S.clock;cb&&cb();};},250);updateResidents();}
 const ZZZ={};const zzzTex=canvasTex(128,64,(g,w,h)=>{g.font='800 34px Fredoka, sans-serif';g.fillStyle='#FFFFFF';g.strokeStyle='rgba(60,70,110,.55)';g.lineWidth=5;for(const [t,x,y,s] of[['Z',14,52,1],['z',56,36,.8],['z',90,22,.6]]){g.font=`800 ${34*s}px Fredoka, sans-serif`;g.strokeText(t,x,y);g.fillText(t,x,y);}});
 function zzzTick(t){for(const k in B){const b=B[k];if(!b.doorC)continue;let s=ZZZ[k];if(b.sleepers>0&&!s){s=new THREE.Sprite(new THREE.SpriteMaterial({map:zzzTex,transparent:true,depthWrite:false,fog:false}));s.scale.set(1.4,.7,1);world.add(s);ZZZ[k]=s;}
@@ -1520,7 +1550,7 @@ function zzzTick(t){for(const k in B){const b=B[k];if(!b.doorC)continue;let s=ZZ
 const CHORE_OF={'cve-lookup':'clean','route-letter':'clean','am-i-affected':'fish','new-cve-digest':'build','cve-report':'build','aggregate-files':'garden','summarize-folder':'garden'};
 const CHORE_TEXT={clean:'tidying up',fish:'fishing',build:'building',garden:'gardening'};
 const SPOTS={garden:[[GARDEN.x-1.4,GARDEN.z-GARDEN.d/2-.45,0],[GARDEN.x+.2,GARDEN.z-GARDEN.d/2-.45,0],[GARDEN.x+GARDEN.w/2+.45,GARDEN.z+.2,-Math.PI/2],[GARDEN.x-GARDEN.w/2-.45,GARDEN.z+.3,Math.PI/2]],
- fish:[[11.15,-5.8,Math.PI/2],[11.15,-2.6,Math.PI/2],[11.15,4.0,Math.PI/2],[11.15,9.2,Math.PI/2]],
+ fish:[[11.6,-5.8,Math.PI/2],[11.6,-2.6,Math.PI/2],[11.6,4.0,Math.PI/2],[11.6,9.2,Math.PI/2]],
  build:[[SITE.x-1.2,SITE.z+.1,Math.PI/2],[SITE.x,SITE.z+1.2,Math.PI],[SITE.x+1.2,SITE.z-.6,-Math.PI/2]],
  clean:[[1.6,1.8,0],[-1.8,1.4,0],[-.4,-2.0,0],[L.archive[0]+1.2,L.archive[1]+2.9,0],[L.scribe[0]-1.2,L.scribe[1]+3.0,0],[2.2,-1.0,0]]}.valueOf();
 const spotBusy=new Map();
@@ -1531,20 +1561,22 @@ function makeTool(type){const g=new THREE.Group();
  if(type==='clean'){mk(CAP(.012,.62,4,8),mat('#C98A5E'),g,[0,-.05,.06],[1,1,1],[.3,0,0]);mk(CONE(.07,.16,10),mat('#F2D27A',strawTex),g,[0,-.4,.17],[1,1,.6],[.3+Math.PI,0,0]);}
  if(type==='build'){const k=kit('Mallet',.55);if(k){k.position.set(0,-.06,.04);k.rotation.set(1.25,0,0);g.add(k);}else{mk(CAP(.012,.17,4,8),mat('#C98A5E'),g,[0,-.08,.05],[1,1,1],[1.2,0,0]);mk(RB(.11,.055,.055,.015,2),mat('#9AA0AE',null,{rough:.4}),g,[0,-.04,.15]);}}
  if(type==='garden'){const u=rnd(),k=u<.4?kit('watering_can_B',.2):u<.7?kit('shovel',.3):kit('Sickle',.45);if(k){k.position.set(0,-.12,.08);k.rotation.set(0,Math.PI/2,0);g.add(k);}else mk(CYL(.06,.07,.12,12),mat('#F2C14E'),g,[0,-.06,.06]);}
- if(type==='fish'){mk(CAP(.008,1.35,4,6),mat('#C98A5E'),g,[0,.32,.48],[1,1,1],[-.95,0,0]);g.userData.rod=true;}
+ if(type==='fish'){const wood=mat('#B07A4E',null,{rough:.5}),cork=mat('#E2C49A'),metal=mat('#8E9AA6',null,{rough:.35});mk(CYL(.026,.03,.2,10),cork,g,[0,.1,0]);mk(CYL(.04,.04,.03,14),metal,g,[.045,.14,0],[1,1,1],[0,0,Math.PI/2]);
+  const blank=mk(G('rodblank',()=>{const c=new THREE.CylinderGeometry(.006,.016,.85,8);c.translate(0,.425,0);return c;}),wood,g,[0,.2,0]);for(const y of[.35,.6,.82])mk(new THREE.TorusGeometry(.014,.004,6,12),metal,g,[0,.2+y,.012]);g.userData.rod=true;g.userData.tip=1.05;}
  return g;}
-function holdTool(v,type){dropTool(v);const t=makeTool(type);t.position.set(0,-.3,0);v.arms[1].add(t);v.tool=t;
+function holdTool(v,type){dropTool(v);const t=makeTool(type);if(type==='fish'){t.position.set(.06,.2,.2);t.rotation.set(.85,0,-.05);v.body.add(t);}else{t.position.set(0,-.3,0);v.arms[1].add(t);}v.tool=t;
  if(type==='fish'){const lineG=new THREE.BufferGeometry().setFromPoints([new THREE.Vector3(),new THREE.Vector3()]);v.fishLine=new THREE.Line(lineG,applyBend(new THREE.LineBasicMaterial({color:0xFFFFFF,transparent:true,opacity:.8})));v.fishLine.frustumCulled=false;world.add(v.fishLine);
   v.bobber=new THREE.Group();mk(SPH(.07,12,8),mat('#F06A5A',null,{rough:.4}),v.bobber,[0,0,0]);mk(SPH(.05,10,6),mat('#FFFFFF'),v.bobber,[0,.05,0]);world.add(v.bobber);v.fishT=4+rnd()*5;}}
 function dropTool(v){if(v.tool){v.tool.parent&&v.tool.parent.remove(v.tool);v.tool=null;}if(v.fishLine){world.remove(v.fishLine);v.fishLine=null;}if(v.bobber){world.remove(v.bobber);v.bobber=null;}if(v.fishPop){world.remove(v.fishPop);v.fishPop=null;}}
-function startChore(v,type,cb){const sp=claimSpot(type,v);routeTo(v,{x:sp.x,z:sp.z},()=>{v.state='working';v.chore=type;v.choreYaw=sp.yaw;v.yaw=sp.yaw;holdTool(v,type);cb&&cb();});}
+function startChore(v,type,cb){const sp=claimSpot(type,v);routeTo(v,{x:sp.x,z:sp.z,exact:true},()=>{v.state='working';v.chore=type;v.choreYaw=sp.yaw;v.yaw=sp.yaw;holdTool(v,type);cb&&cb();});}
 const _tipV=new THREE.Vector3();
 function choreTick(v,dt,t){const c=v.chore;if(!c)return;const s=Math.sin(t*(c==='build'?9:c==='clean'?4.5:2.2)+v.phase);v.yaw+=(v.choreYaw-v.yaw)*Math.min(1,dt*4);
  if(c==='clean'){v.arms[1].rotation.x=-.5+s*.35;v.arms[0].rotation.x=-.4+s*.3;v.body.rotation.y=s*.18;if(!reduce&&Math.abs(s)>.98&&!v._sw){v._sw=1;idleSnd('sweep',v);}if(Math.abs(s)<.5)v._sw=0;}
  if(c==='build'){const up=Math.max(0,s);v.arms[1].rotation.x=-.6-up*1.3;if(s<-.9&&!v._hm){v._hm=1;idleSnd('hammer',v);}if(s>0)v._hm=0;}
  if(c==='garden'){v.arms[1].rotation.x=-.9+s*.12;v.arms[0].rotation.x=-.3;v.body.rotation.x=.12+s*.04;if(!reduce&&Math.abs(s)>.99&&!v._gd){v._gd=1;idleSnd('water',v);}if(Math.abs(s)<.6)v._gd=0;}
- if(c==='fish'){v.arms[1].rotation.x=-.85+Math.sin(t*1.3)*.05;v.arms[0].rotation.x=-.5;
-  if(v.tool&&v.fishLine){v.tool.updateMatrixWorld(true);_tipV.set(0,.32+.6*Math.cos(.95)+.05,.48+.6*Math.sin(.95)+.3);v.tool.localToWorld(_tipV);
+ if(c==='fish'){v.body.position.y=-.2;v.legs.forEach(l=>{l.rotation.x=-1.35;});v.arms[1].rotation.x=-1.0+Math.sin(t*1.3)*.04;v.arms[0].rotation.x=-1.05+Math.sin(t*1.3)*.04;
+  if(v.tool){const bite=v.fishT<.6&&v.fishT>0;v.tool.rotation.x=.85+(bite?-.25:Math.sin(t*1.3)*.03);}
+  if(v.tool&&v.fishLine){v.root.updateMatrixWorld(true);_tipV.set(0,v.tool.userData.tip||1.2,0);v.tool.localToWorld(_tipV);
    const bx=v.x+Math.sin(v.yaw)*2.0,bz=v.z+Math.cos(v.yaw)*2.0;v.fishT-=dt;const dip=v.fishT<.6&&v.fishT>0?-.12:0;v.bobber.position.set(bx,-.36+(reduce?0:Math.sin(t*2.4+v.phase)*.025)+dip,bz);
    const pa=v.fishLine.geometry.attributes.position;pa.setXYZ(0,_tipV.x,_tipV.y,_tipV.z);pa.setXYZ(1,bx,v.bobber.position.y+.05,bz);pa.needsUpdate=true;
    if(v.fishT<=0){v.fishT=6+rnd()*6;idleSnd('plop',v);if(!v.fishPop){v.fishPop=new THREE.Group();mk(SPH(.09,12,8),mat('#F2A04A',null,{rough:.4}),v.fishPop,[0,0,0],[1.6,.8,.6]);mk(CONE(.07,.1,3),mat('#F2A04A'),v.fishPop,[-.17,0,0],[1,1,.4],[0,0,Math.PI/2]);world.add(v.fishPop);}v.fishPopT=0;}
@@ -1555,7 +1587,7 @@ let routineT=25;
 function routineTick(step){routineT-=step;if(routineT>0)return;routineT=35+rnd()*40;if(S.mill.busy||S.mill.queue.length>1)return;
  const pool=V.filter(v=>!v.job&&!v.leaving&&v.id!=='barnaby'&&v.id!=='sedge'&&(v.state==='sleeping'||v.state==='idle'));if(!pool.length)return;const v=pool[Math.floor(rnd()*pool.length)];
  const skill=(v.skill||'cve-lookup').replace(/ v.*$/,'');const job=jobFor('helper',{skill,home:v.home});job.label='routine check';job.busy=`Routine: ${CHORE_TEXT[CHORE_OF[skill]||'clean']}…`;startJob(v,job);}
-const benchSpot=i=>({x:BENCH.x-.8+i*.8-(i>2?3.4:0),z:BENCH.z+(i>2?1.2:0)});
+const benchSpot=i=>({x:BENCH.x-.8+i*.8-(i>2?3.4:0),z:BENCH.z+(i>2?1.2:0),exact:true});
 let jobSeq=1;
 const first=n=>n.split(' ')[0];
 function jobFor(kind,arg){
@@ -1565,7 +1597,7 @@ function jobFor(kind,arg){
  if(kind==='helper')return{skill:arg.skill+' v1.0.0',label:'sample task',busy:'Thinking…',work:'Double-checking',dur:3,parcel:`${arg.skill}: sample result`,kind:'Sample',rib:'#C6B6E4',open:'parcels',at:arg.home};
 }
 function startJob(v,job){if(v.state==='sleeping'){wakeUp(v,()=>startJob(v,job));return;}if(v.state==='entering'||v.state==='waking'){setTimeout(()=>startJob(v,job),900);return;}job.id=jobSeq++;job.v=v;v.job=job;v.carry=true;v.bubble='';onJobStart(v,job);
-  const i=S.mill.queue.length;routeTo(v,benchSpot(i),()=>{v.state='waiting';v.bubble='Waiting for the Mill';S.mill.queue.push(job);renderStatus();if(S.tab==='mill')renderPage();});
+  const taken=new Set(V.filter(o=>o!==v&&o.job&&!o.job.ran&&o.job!==S.mill.busy&&!S.mill.queue.includes(o.job)&&o.benchI!=null).map(o=>o.benchI));let i=S.mill.queue.length;while(taken.has(i))i++;v.benchI=i;routeTo(v,benchSpot(i),()=>{v.state='waiting';v.bubble='Waiting for the Mill';S.mill.queue.push(job);renderStatus();if(S.tab==='mill')renderPage();});
   log(first(v.name),'job.start',`${job.skill} · ${job.label}`);}
 function millTick(){if(S.mill.busy||!S.mill.queue.length)return;const job=S.mill.queue.shift();S.mill.busy=job;job.left=null;const v=job.v;v.bubble='';
   const type=CHORE_OF[job.skill.replace(/ v.*$/,'')]||'clean';startChore(v,type,()=>{v.bubble=job.busy;job.left=job.dur*2.2;job.ran=true;log(NM.barnaby,'mill.run',`${S.mill.model} · ${job.skill} for ${first(v.name)} (${CHORE_TEXT[type]} while it runs)`);renderStatus();if(S.tab==='mill')renderPage();});
@@ -1588,7 +1620,7 @@ function nextLetter(v){if(v.job||!v.letters.length)return;startJob(v,v.letters.s
 if(location.hash.includes('cast')){S.mill.busy=null;S.mill.queue=[];S.knock=false;V.forEach((v,i)=>{v.job=null;v.path=[];v.bubble='';v.carry=false;v.state='cast';v.x=-2.8+(i%5)*1.4;v.z=-1.2+Math.floor(i/5)*1.7;v.yaw=0;});CAM.target.set(0,.6,-.4);CAM.dist=CAM.want=12;}
 function sendLetter(txt){txt=(txt||'').trim();if(!txt)return;const id=(txt.match(/CVE-\d{4}-\d{4,7}/i)||[])[0];
  if(id){const v=byId.marigold;const job=jobFor('cve',id.toUpperCase());job.ask=txt;log(NM.marigold,'letter.received',`“${txt}”`);if(v.job){queueLetter(v,job,txt);toast(`Marigold has ${v.letters.length} letter${v.letters.length>1?'s':''} waiting. She’ll take it after her current job.`);}else startJob(v,job);return;}
- if(/check|affected|this pc|installed|inventory/i.test(txt)){if(!S.approved){S.knock=true;const v=byId.sedge;if(v.state!=='knocking')routeTo(v,{x:B.home.door.x-.75,z:B.home.door.z-.15},()=>{v.state='knocking';v.bubble='Knock knock!';});renderKnock();renderStatus();toast(NM.sedge+' needs your OK before reading this PC’s program list for the first time.');return;}
+ if(/check|affected|this pc|installed|inventory/i.test(txt)){if(!S.approved){S.knock=true;const v=byId.sedge;if(v.state!=='knocking')routeTo(v,{x:B.home.door.x-.75,z:B.home.door.z-.15,exact:true},()=>{v.state='knocking';v.bubble='Knock knock!';});renderKnock();renderStatus();toast(NM.sedge+' needs your OK before reading this PC’s program list for the first time.');return;}
   const v=byId.sedge;const job=jobFor('pc');job.ask=txt;log(NM.sedge,'letter.received',`“${txt}”`);if(v.job)queueLetter(v,job,txt);else startPc(v,job);return;}
  if(/digest|gazette|news|morning/i.test(txt)){const v=byId.fennel;const job=jobFor('digest');job.ask=txt;log(NM.fennel,'letter.received',`“${txt}”`);if(v.job){queueLetter(v,job,txt);toast('Fennel will print it after the current edition.');}else startJob(v,job);return;}
  const b=byId.bramble;b.bubble='Hmm, who should get this?';setTimeout(()=>{b.bubble='';},2500);
@@ -1622,7 +1654,7 @@ const SKILL_ABOUT={
  'am-i-affected':n=>`Watches over this PC. With your OK, ${n} reads the list of installed programs, lets code match versions against advisories, then explains which programs are affected and why.`,
  'new-cve-digest':n=>`Writes the morning Gazette: what changed in last night’s data, what touches your programs, and what got fixed. ${n} keeps it short and friendly.`,
  'cve-report':n=>`Turns findings into a tidy report you can export as Markdown, CSV or HTML. ${n} orders things by your tier rules, never by opinion.`,
- 'route-letter':n=>`Sorts your letters and walks each one to the villager whose skill fits. ${n} uses simple rules now; free-form sorting comes later.`,
+ 'route-letter':n=>`Sorts your letters and walks each one to the villager whose skill fits. ${n} reads what you wrote and decides who should get it.`,
  'aggregate-files':n=>`Gathers files from folders you choose and combines them into one clean table, noting what was merged and what was skipped.`,
  'summarize-folder':n=>`Reads a folder you choose and writes a one-page summary, with the file each point came from.`,
  '—':n=>`Runs the Mill: the one AI model your graphics card can hold. ${n} doesn’t think for anyone; ${n} just decides who sits at the stones next.`};
@@ -1705,7 +1737,7 @@ function pumpPortraits(){const v=PQ[0];if(!v)return;let url='';try{url=renderPor
 const porImg=(v,cls='')=>{wantPortrait(v);const u=portrait(v);return `<img class="por ${cls}${u?' ready':''}" data-por="${escH(v.name)}" alt="" ${u?`src="${u}"`:''} style="--np:${(NP[v.np]||NP.mint)[0]}">`;};
 /* ---- the chat window ---- */
 const VW={v:null,stick:true,typing:null};
-function openVillager(v,focus){ensureVillager(v);const was=VW.v;VW.v=v;VW.stick=true;S.vwinTop=true;const w=$('#vwin');w.classList.add('open');w.setAttribute('aria-hidden','false');$('#app').classList.add('vwin-open');$('#maphint').hidden=true;
+function openVillager(v,focus){ensureVillager(v);aiCheck();const was=VW.v;VW.v=v;VW.stick=true;S.vwinTop=true;const w=$('#vwin');w.classList.add('open');w.setAttribute('aria-hidden','false');$('#app').classList.add('vwin-open');$('#maphint').hidden=true;
  renderVwin();if(!was)sfx.open();else sfx.pop();if(focus!==false)setTimeout(()=>{const i=$('#vwText');if(i)i.focus({preventScroll:true});},60);}
 function closeVwin(){if(!VW.v)return false;VW.v=null;const w=$('#vwin');w.classList.remove('open');w.setAttribute('aria-hidden','true');$('#app').classList.remove('vwin-open');sfx.close();return true;}
 function renderVwin(){const v=VW.v;if(!v)return;const p=persona(v),np=NP[v.np]||NP.mint,sk=(v.skill||'—').replace(/ v.*$/,''),fn=first(v.name);
@@ -1718,15 +1750,16 @@ function renderVwin(){const v=VW.v;if(!v)return;const p=persona(v),np=NP[v.np]||
   <div class="role"><h4>Job</h4><p>${(SKILL_ABOUT[sk]||SKILL_ABOUT['—'])(fn)}${v.helper?' Helpers take the overflow when a queue stays long.':''}</p><p class="meta"><span class="mono">${escH(v.skill||'—')}</span> · ${v.tier==='—'?'no AI model':escH(v.tier)+' model'} · lives at the ${escH((B[v.home]||{}).label||v.home)}</p></div>
   <div class="moodrow"><div class="mtop"><h4>Mood</h4><span id="vwMoodWhy"></span></div><div class="mtrack" aria-hidden="true"><i id="vwMoodPin"></i></div><div class="mscale" aria-hidden="true"><span>Undertasked</span><span>Just right</span><span>Overtasked</span></div></div></div>`;
  $('#vwCard').open=VW.cardPin!=null?VW.cardPin:!(v.chat.length||v.job||v.state==='knocking');$('#vwin').style.setProperty('--np',np[0]);$('#vwin').style.setProperty('--np-ink',np[1]);
- $('#vwText').placeholder=v.id==='barnaby'?`Ask ${fn} about the Mill…`:v.job?`Leave ${fn} a task for after this one…`:`Ask ${fn} to…`;
+ $('#vwText').placeholder=`Talk to ${fn}, or give them a task…`;renderAIChip();
  renderChatList();vwinTick(true);}
 function renderChatList(){const v=VW.v;if(!v)return;const el=$('#vwChat'),near=el.scrollHeight-el.scrollTop-el.clientHeight<40;const fn=first(v.name);let h='';
  for(const e of v.chat){if(e.type==='job')h+=`<div class="think" data-job="${e.job.id}">${thinkHTML(e.job)}</div>`;else if(e.who==='you')h+=`<div class="msg you"><p>${escH(e.text)}</p></div>`;else if(e.who==='sys')h+=`<div class="msg sys">${escH(e.text)}</div>`;
+  else if(e.rid)h+=`<div class="msg them ai" data-rid="${e.rid}">${entryHTML(v,e)}</div>`;
   else h+=`<div class="msg them">${porImg(v,'av')}<p>${e.html||escH(e.text)}</p></div>`;}
  if(v.state==='knocking'&&S.knock)h+=`<div class="msg them">${porImg(v,'av')}<p>Knock knock! To answer “check this PC” I need to read the list of installed programs here. It’s the first time, so I need your OK. I won’t use the network or change anything.</p></div><div class="msg acts"><button class="btn btn--primary btn--sm" type="button" data-approve="once">Allow this time</button><button class="btn btn--secondary btn--sm" type="button" data-approve="always">Always for this skill</button><button class="btn btn--quiet" type="button" data-deny>Not now</button></div>`;
  if(VW.typing===v)h+=`<div class="msg them typing">${porImg(v,'av')}<p><i></i><i></i><i></i></p></div>`;
  if(!h){const sk=(v.skill||'—').replace(/ v.*$/,'');const asleep=v.state==='sleeping'||v.state==='entering';
-  h=`<div class="vw-empty">${porImg(v,'mid')}<p><b>${escH(fn)} isn’t doing anything right now${asleep?' (napping at home)':''}.</b><br>Give them a task and you’ll see their thinking here as they work.</p><div class="sugg">${(SUGGEST[sk]||[]).map(s=>`<button type="button" class="chip" data-vsay="${escH(s)}">${escH(s)}</button>`).join('')}</div></div>`;}
+  h=`<div class="vw-empty">${porImg(v,'mid')}<p><b>${escH(fn)} isn’t doing anything right now${asleep?' (napping at home)':''}.</b><br>Say hi, ask them anything, or give them a task. You’ll see their thinking here as they work.</p><div class="sugg">${(SUGGEST[sk]||[]).map(s=>`<button type="button" class="chip" data-vsay="${escH(s)}">${escH(s)}</button>`).join('')}</div></div>`;}
  else if(!v.job&&v.state!=='knocking'&&v.id!=='barnaby'){const sk=(v.skill||'—').replace(/ v.*$/,'');h+=`<div class="msg sys">${escH(fn)} is free now.</div><div class="sugg end">${(SUGGEST[sk]||[]).map(s=>`<button type="button" class="chip" data-vsay="${escH(s)}">${escH(s)}</button>`).join('')}</div>`;}
  el.innerHTML=h;if(near||VW.stick){el.scrollTop=el.scrollHeight;VW.stick=false;}}
 let vwT=0;
@@ -1735,22 +1768,79 @@ function vwinTick(force){const v=VW.v;if(!v)return;const m=moodOf(v);const chip=
  const st=$('#vwState');if(st)st.textContent=stateText(v);
  if(v.id==='barnaby'){const b=S.mill.busy;$('#vwState').textContent=b?`Stones turning for ${first(b.v.name)} · ${S.mill.queue.length} waiting`:'The Mill is idle';}}
 // what you type in the chat becomes a task for this villager, using their own skill
-function taskVillager(v,txt){txt=(txt||'').trim();if(!txt)return;ensureVillager(v);const fn=first(v.name),sk=(v.skill||'—').replace(/ v.*$/,'');VW.stick=true;
- const reply=(t,o)=>{VW.typing=v;renderChatList();const ms=reduce?150:700+Math.min(900,t.length*8);setTimeout(()=>{if(VW.typing===v)VW.typing=null;chatSay(v,t,o);},ms);return ms;};
- if(v.id==='barnaby'){v.chat.push({who:'you',text:txt});const b=S.mill.busy;if(/mill|queue|who|next|busy|what/i.test(txt)&&!/cve|check|digest|gazette|combine|summar/i.test(txt)){reply(b?`${first(b.v.name)} is at the stones (${b.skill}). ${S.mill.queue.length?'Next: '+S.mill.queue.map(j=>first(j.v.name)).join(', ')+'.':'Nobody else is waiting.'}`:'The stones are still. Nobody’s waiting.');return;}
-  reply(`I only turn the stones; I don’t do the thinking! I’ll pass this to ${NM.bramble} to sort.`);setTimeout(()=>sendLetter(txt),1200);return;}
- if(sk==='route-letter'){v.chat.push({who:'you',text:txt});reply('Let me see whose skill fits… I’ll take it over.');setTimeout(()=>sendLetter(txt),900);return;}
+/* ---- talking to villagers: real replies from the local model (Ollama on this PC), in-character fallback when it isn't running ---- */
+const AI={base:'http://127.0.0.1:11434',model:null,want:'qwen3.5:4b',ok:null,think:true,checked:0,busy:Promise.resolve(),seq:0};
+async function aiCheck(force){if(!force&&performance.now()-AI.checked<30000&&AI.ok!==null)return AI.ok;AI.checked=performance.now();
+ try{const ctl=new AbortController();const tm=setTimeout(()=>ctl.abort(),1800);const r=await fetch(AI.base+'/api/tags',{signal:ctl.signal});clearTimeout(tm);if(!r.ok)throw new Error(r.status);
+  const names=((await r.json()).models||[]).map(m=>m.name);const want=(typeof SET!=='undefined'&&SET.aiModel)||AI.want;
+  AI.model=names.find(n=>n===want)||names.find(n=>n.startsWith(want.split(':')[0]))||names.find(n=>/qwen/i.test(n))||names[0]||null;AI.ok=!!AI.model;}
+ catch(e){AI.ok=false;AI.model=null;}renderAIChip();return AI.ok;}
+function renderAIChip(){const c=$('#vwAI');if(!c)return;c.dataset.on=AI.ok?'1':'0';c.textContent=AI.ok?`${AI.model} · on this PC`:'Simple replies';c.title=AI.ok?`Replies come from ${AI.model} running in Ollama on this PC. Nothing leaves the computer.`:'Ollama isn’t running on this PC, so villagers answer with simple built-in replies. Start Ollama (with qwen3.5:4b) for real conversation.';}
+const SK=v=>(v.skill||'—').replace(/ v.*$/,'');
+function looksLikeTask(v,txt){return /CVE-\d{4}-\d{4,7}/i.test(txt)||/^(please\s+)?(can|could|would|will) you\s+(please\s+)?(look|check|scan|find|search|combine|merge|aggregate|summari[sz]e|write|make|print|create|run|compare|list|collect|gather|analy[sz]e|sort|route|send|do|prepare|draft)/i.test(txt)
+ ||/^(please\s+)?(look ?up|check|scan|find|search|combine|merge|aggregate|summari[sz]e|write|make|print|create|run|compare|list|collect|gather|analy[sz]e|sort|route|send|prepare|draft)\b/i.test(txt)||/\b(this pc|digest|gazette|report on|spreadsheets?|folder)\b/i.test(txt);}
+function systemPrompt(v){const p=persona(v),m=moodOf(v),fn=first(v.name),sk=SK(v);
+ const roster=V.filter(o=>!o.leaving&&o!==v).slice(0,12).map(o=>`${first(o.name)} (${o.role}; skill ${SK(o)})`).join(', ');
+ return `You are ${v.name}, a ${p.trait.toLowerCase()} ${v.kind} who lives in Hollowbrook, a cozy little village that runs entirely offline on the owner's PC. The person talking to you is the owner of the village.
+Your job: ${v.role}. ${(SKILL_ABOUT[sk]||SKILL_ABOUT['—'])(fn)}
+About you: born ${MON[p.mo-1]} ${p.da} (${p.sign}); you like ${p.likes.join(', ')}; you dislike ${p.dislikes.join(' and ')}; your favourite spot is ${p.fav}.
+Right now you are ${stateText(v)}${v.job?` (working on: ${v.job.label})`:''}. Your mood is ${m.l.toLowerCase()}: ${m.d.toLowerCase()} (${m.why}).
+Other villagers: ${roster}.
+How to talk: stay in character, first person, warm and natural, 1 to 3 short sentences, plain text with no markdown or emoji lists. You have your own opinions and feelings. Never pretend you already did work, never invent facts, CVE details or file contents, and remember you cannot use the internet.
+Tasks: only if the owner clearly asks you to do a piece of work that fits your skill, answer briefly and then add one final line exactly like: TASK: <short description of the work>. For greetings, questions or chit-chat, just reply and do not add a TASK line. If they want work outside your skill, tell them which villager could help instead.`;}
+function historyFor(v,limit=12){const out=[];for(const e of v.chat){if(e.who==='you')out.push({role:'user',content:e.text});else if(e.who==='them'&&e.text&&!e.live)out.push({role:'assistant',content:e.text});}return out.slice(-limit);}
+async function streamChat(messages,onDelta){const body={model:AI.model,messages,stream:true,options:{temperature:.75,num_ctx:4096,num_predict:900},keep_alive:'5m'};if(AI.think)body.think=true;
+ let r=await fetch(AI.base+'/api/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});
+ if(!r.ok&&AI.think){const t=await r.text();if(/think/i.test(t)){AI.think=false;delete body.think;r=await fetch(AI.base+'/api/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});}else throw new Error(t);}
+ if(!r.ok)throw new Error(await r.text());const rd=r.body.getReader(),dec=new TextDecoder();let buf='';
+ for(;;){const {value,done}=await rd.read();if(done)break;buf+=dec.decode(value,{stream:true});let i;while((i=buf.indexOf('\n'))>=0){const line=buf.slice(0,i).trim();buf=buf.slice(i+1);if(!line)continue;const j=JSON.parse(line);if(j.error)throw new Error(j.error);const msg=j.message||{};onDelta(msg.thinking||'',msg.content||'');}}}
+function aiReply(v,txt){const e={who:'them',text:'',think:'',live:true,rid:'r'+(++AI.seq),t0:performance.now()};v.chat.push(e);VW.stick=true;renderChatList();
+ const msgs=[{role:'system',content:systemPrompt(v)},...historyFor(v)];
+ AI.busy=AI.busy.then(async()=>{try{let raw='';await streamChat(msgs,(th,ct)=>{e.think+=th;raw+=ct;let shown=raw;const a=shown.indexOf('<think>');if(a>=0){const b=shown.indexOf('</think>');e.think=shown.slice(a+7,b>=0?b:undefined);shown=b>=0?shown.slice(b+8):'';}e.text=shown.replace(/\n?\s*TASK:[\s\S]*$/i,'').trim();updateEntry(v,e);});
+   e.live=false;e.secs=Math.max(1,Math.round((performance.now()-e.t0)/1000));const tm=raw.replace(/<think>[\s\S]*?<\/think>/,'').match(/TASK:\s*(.+)\s*$/i);if(!e.text)e.text=tm?'On it!':'…';updateEntry(v,e,true);
+   log(first(v.name),'chat.reply',`${AI.model} · ${e.secs}s${tm?' · task: '+clip(tm[1],60):''}`);if(tm)doTask(v,tm[1].trim(),true);}
+  catch(err){console.warn('Hollowbrook: model reply failed',err);AI.ok=false;renderAIChip();e.live=false;e.think='';
+   if(looksLikeTask(v,txt)){v.chat.splice(v.chat.indexOf(e),1);renderChatList();doTask(v,txt);}else{e.text=smallTalk(v,txt);updateEntry(v,e,true);}
+   if(!AI.warned){AI.warned=true;v.chat.push({who:'sys',text:'Couldn’t reach Ollama on this PC, so replies are simple for now.'});renderChatList();}}});}
+function entryHTML(v,e){const tk=e.think?`<details class="tk"${e.live&&!e.text?' open':''}><summary>${e.live&&!e.text?'Thinking…':`Thought for ${e.secs||Math.max(1,Math.round((performance.now()-e.t0)/1000))}s`}</summary><p>${escH(e.think.trim())}</p></details>`:'';
+ const body=e.text?`<p>${escH(e.text)}${e.live?'<span class="caret"></span>':''}</p>`:(e.live?'<p class="dots3"><i></i><i></i><i></i></p>':'');return `${porImg(v,'av')}<div class="bubcol">${tk}${body}</div>`;}
+function updateEntry(v,e,full){if(VW.v!==v)return;const el=$('#vwChat'),n=el.querySelector(`[data-rid="${e.rid}"]`);if(!n||full){renderChatList();return;}const near=el.scrollHeight-el.scrollTop-el.clientHeight<70;n.innerHTML=entryHTML(v,e);const tp=n.querySelector('.tk p');if(tp&&e.live)tp.scrollTop=tp.scrollHeight;if(near)el.scrollTop=el.scrollHeight;}
+function sayTyping(v,t){VW.typing=v;renderChatList();const ms=reduce?150:700+Math.min(900,t.length*8);setTimeout(()=>{if(VW.typing===v)VW.typing=null;chatSay(v,t);},ms);return ms;}
+const SKILL_ME={'cve-lookup':'I look up vulnerabilities in our offline Almanac and write fact cards, using only what the sources say.','am-i-affected':'I check which programs on this PC are affected by known vulnerabilities, with your OK first.',
+ 'new-cve-digest':'I write the morning Gazette about what changed in the data overnight.','cve-report':'I turn findings into tidy reports you can export.','route-letter':'I sort letters and take them to whoever can help.',
+ 'aggregate-files':'I gather files from folders you choose and combine them into one clean table.','summarize-folder':'I read a folder you choose and write a short summary of it.','—':'I run the Mill and decide who gets the model next.'};
+// in-character replies when no model is running
+function smallTalk(v,txt){const p=persona(v),m=moodOf(v),fn=first(v.name),sk=SK(v),t=txt.toLowerCase();
+ if(v.id==='barnaby'&&/mill|queue|who|next|busy|stones/.test(t)){const b=S.mill.busy;return b?`${first(b.v.name)} is at the stones (${b.skill}). ${S.mill.queue.length?'Next: '+S.mill.queue.map(j=>first(j.v.name)).join(', ')+'.':'Nobody else is waiting.'}`:'The stones are still. Nobody’s waiting.';}
+ if(/^(hi|hey|hello|howdy|hiya|yo|good (morning|afternoon|evening))\b/.test(t))return pickLine(v,[`Hi there! I’m feeling ${m.l.toLowerCase()} today.`,`Hello! Nice of you to stop by.`,`Oh, hi! I was just thinking about ${p.likes[0]}.`]);
+ if(/how are (you|u)|how('?s| is) it going|how do you feel/.test(t))return m.k==='bored'?'Honestly a bit bored. I’d love something to do!':m.k==='frazzled'?'A little frazzled, to be honest. There’s a lot on my plate.':m.k==='stretched'?'Busy, busy! But I’m managing.':'Pretty good, thanks for asking!';
+ if(/what do you do|your job|what can you do|who are you/.test(t))return `I’m ${fn}, the ${v.role.replace(/ \(.*\)/,'').toLowerCase()}. ${SKILL_ME[sk]||SKILL_ME['—']}`;
+ if(/like|favou?rite|love/.test(t))return `I love ${p.likes.join(', ')}. And ${p.fav} is my favourite spot.`;
+ if(/hate|dislike|annoy/.test(t))return `Don’t get me started on ${p.dislikes[0]}. Or ${p.dislikes[1]}!`;
+ if(/birthday|born|zodiac|sign|star/.test(t))return `My birthday is ${MON[p.mo-1]} ${p.da}, so I’m a ${p.sign}.`;
+ if(/thank|thanks|ty\b/.test(t))return 'Anytime!';
+ if(/bye|goodnight|see you|later/.test(t))return 'See you around!';
+ return `Hmm, I’m not sure what to say to that. I’m best at ${sk==='—'?'running the Mill':sk.replace(/-/g,' ')}${SUGGEST[sk]&&SUGGEST[sk][0]?`, like “${SUGGEST[sk][0]}”`:''}.`;}
+
+aiCheck(true);
+// turning a request into work with this villager's own skill
+function doTask(v,txt,quiet){const fn=first(v.name),sk=SK(v);const reply=t=>quiet?0:sayTyping(v,t);
+ if(v.id==='barnaby'||sk==='route-letter'){const ms=reply(v.id==='barnaby'?`I only turn the stones; I’ll pass this to ${NM.bramble} to sort.`:'Let me see whose skill fits… I’ll take it over.');setTimeout(()=>sendLetter(txt),ms+400);return;}
+ if(sk==='am-i-affected'&&v.id==='sedge'&&!S.approved){const ms=reply('I’d love to, but reading this PC’s program list needs your OK first. I’ll come knock on your door.');setTimeout(()=>sendLetter('check this PC'),ms+300);return;}
  let job;const id=(txt.toUpperCase().match(/CVE-\d{4}-\d{4,7}/)||[])[0];
- if(sk==='am-i-affected'&&v.id==='sedge'&&!S.approved){v.chat.push({who:'you',text:txt});reply('I’d love to, but reading this PC’s program list needs your OK first. I’ll come knock on your door.');setTimeout(()=>sendLetter('check this PC'),900);return;}
  if(sk==='cve-lookup'&&id){job=jobFor('cve',id);if(v.id!=='marigold'){job.done=()=>{S.almanac=id;log(fn,'verify.passed','facts_from_tools_only ✓');if(S.tab==='almanac')renderPage();};}}
  else if(sk==='am-i-affected'&&v.id==='sedge')job=jobFor('pc');
  else if(sk==='new-cve-digest')job=jobFor('digest');
- else{job=jobFor('helper',{skill:sk,home:v.home});job.label=clip(txt,40);job.parcel=`${sk}: ${clip(txt,36)}`;job.busy=`Working on it…`;}
- job.ask=txt;log(fn,'letter.received',`“${clip(txt,80)}” (from the chat)`);
- if(v.job){queueLetter(v,job,txt);return;}
- job.askShown=true;v.chat.push({who:'you',text:txt});
-const asleep=v.state==='sleeping';const ms=reply(asleep?`*yawn* Coming! I’ll head to the Mill bench.`:pickLine(v,['On it! Heading to the Mill bench.','Ooh, a task! Off to the bench.','Right away. I’ll wait my turn at the Mill.','Leave it with me.']));
+ else{job=jobFor('helper',{skill:sk,home:v.home});job.label=clip(txt,40);job.parcel=`${sk}: ${clip(txt,36)}`;job.busy='Working on it…';}
+ job.ask=txt;job.askShown=true;log(fn,'letter.received',`“${clip(txt,80)}” (from the chat)`);
+ if(v.job){v.letters.push(job);reply(`Got it. I’ll start on that after my current job (${v.letters.length} waiting).`);renderChatList();return;}
+ const ms=reply(v.state==='sleeping'?'*yawn* Coming! I’ll head to the Mill bench.':pickLine(v,['On it! Heading to the Mill bench.','Ooh, a task! Off to the bench.','Right away. I’ll wait my turn at the Mill.','Leave it with me.']));
  setTimeout(()=>{if(v.job){v.letters.push(job);return;}if(sk==='am-i-affected'&&v.id==='sedge')startPc(v,job);else startJob(v,job);},ms+120);}
+function taskVillager(v,txt){txt=(txt||'').trim();if(!txt)return;ensureVillager(v);VW.stick=true;v.chat.push({who:'you',text:txt});renderChatList();
+ if(AI.ok){aiReply(v,txt);return;}
+ if(looksLikeTask(v,txt)){doTask(v,txt);return;}
+ sayTyping(v,smallTalk(v,txt));}
+
 const pickLine=(v,a)=>a[(hashStr(v.name)+v.chat.length)%a.length];
 // mood shows up on the map too: bored villagers ask for work, frazzled ones sigh
 let moodT=12;
@@ -1894,9 +1984,20 @@ cv.addEventListener('click',ev=>{if(drag&&drag.moved)return;const h=pick(ev);if(
 
 /* ======================= loop (≤30 fps; paused when hidden or in Focus) ======================= */
 let last=performance.now(),acc=0,frameN=0,firstFrame=true;const SIMSPEED=+((location.hash.match(/speed=(\d+)/)||[])[1]||1);
+const HANG=[{x:2.95,z:-5.2,say:['Mmm, cinnamon rolls!','One croissant, please!','It smells like fresh bread!','Ooh, strawberry cake today.']},{x:4.9,z:-4.6,say:['Tea break!','This pie is perfect.']},
+ {x:-13.4,z:-4.3,say:['Picnic time!','Cake on the blanket!']},{x:.2,z:1.0,say:['What a lovely day.','Hello, neighbour!']},{x:-11.4,z:11.4,say:['These carrots look great!','Fresh tomatoes!']},{x:-16.2,z:.8,say:['The lanterns are pretty here.']},{x:-5.6,z:-8.2,say:['The frogs are singing.']}];
+function wanderTarget(v){if(rnd()<.4){const h=HANG[Math.floor(rnd()*HANG.length)];return{x:h.x+(rnd()-.5)*.8,z:h.z+(rnd()-.5)*.6,say:h.say};}const h=B[v.home];return{x:h.door.x+(rnd()-.5)*3,z:h.door.z+.4+rnd()*1.4};}
+const SPACE=.78;
+function personalSpace(v,dt,hx,hz){if(!v.root.visible)return;let px=0,pz=0;
+ for(const o of V){if(o===v||!o.root.visible)continue;const ox=v.x-o.x,oz=v.z-o.z,dd=Math.hypot(ox,oz);if(dd>=SPACE)continue;
+  const k=(SPACE-Math.max(dd,.05))/SPACE;const ux=dd>.01?ox/dd:Math.cos(v.phase),uz=dd>.01?oz/dd:Math.sin(v.phase);px+=ux*k;pz+=uz*k;
+  if((hx||hz)&&hx*-ux+hz*-uz>.2){const side=(hx*uz-hz*ux)>=0?1:-1;px+=hz*side*k*1.2;pz+=-hx*side*k*1.2;}}
+ if(!px&&!pz)return;const m=Math.min(2.2*dt,Math.hypot(px,pz)*dt*3.4),l=Math.hypot(px,pz),nx=v.x+px/l*m,nz=v.z+pz/l*m;
+ const [ci,cj]=cellOf(nx,nz);if(freeAt(ci,cj)){v.x=nx;v.z=nz;}}
 function animateVillager(v,dt,t){
  if(v.path.length){const p=v.path[0];const dx=p.x-v.x,dz=p.z-v.z,d=Math.hypot(dx,dz),sp=2.4*dt;v.yaw=Math.atan2(dx,dz);
   if(d<=sp){v.x=p.x;v.z=p.z;v.path.shift();if(!v.path.length){const cb=v.onArrive;v.onArrive=null;if(cb)cb();}}else{v.x+=dx/d*sp;v.z+=dz/d*sp;}
+  if(d>1e-3)personalSpace(v,dt,dx/d,dz/d);
   const ps=Math.sin(v.phase);v.phase+=dt*10;const s=Math.sin(v.phase);if((ps<0)!==(s<0))idleSnd('step',v);v.legs[0].rotation.x=s*.6;v.legs[1].rotation.x=-s*.6;v.arms[0].rotation.x=-s*.5;v.arms[1].rotation.x=s*.5;
   v.body.position.y=reduce?0:Math.abs(s)*.07;v.body.rotation.z=reduce?0:s*.06;}
  else{v.legs.forEach(l=>l.rotation.x*=.8);v.arms.forEach(a=>a.rotation.x*=.8);v.body.position.y*=.8;v.body.rotation.z*=.8;
@@ -1904,8 +2005,9 @@ function animateVillager(v,dt,t){
   v.body.scale.y=v.SC*(1+(reduce?0:Math.sin(t*2.2+v.phase)*.015));
   if(v.state==='knocking'&&!reduce)v.arms[1].rotation.x=-1.6+Math.sin(t*12)*.35;
   if(v.state==='idle'&&!v.leaving){v.idleAcc=(v.idleAcc||0)+dt;if(!v.job&&!v.letters.length&&v.id!=='barnaby'&&v.idleAcc>(SUN.night>.5?4:24)){v.idleAcc=0;goSleep(v);}
-   else if(!reduce){v.idleT-=dt;if(v.idleT<=0){v.idleT=3+rnd()*5;const h=B[v.home];routeTo(v,{x:h.door.x+(rnd()-.5)*3,z:h.door.z+.4+rnd()*1.4},()=>{v.state='idle';},'idle');}}}
-  if(v.state==='working'&&v.chore)choreTick(v,dt,t);}
+   else if(!reduce){v.idleT-=dt;if(v.idleT<=0){v.idleT=3+rnd()*5;const w=wanderTarget(v);routeTo(v,{x:w.x,z:w.z},()=>{v.state='idle';if(w.say&&!v.bubble&&rnd()<.7){const l=w.say[Math.floor(rnd()*w.say.length)];v.bubble=l;setTimeout(()=>{if(v.bubble===l)v.bubble='';},2600);}},'idle');}}}
+  if(v.state==='working'&&v.chore)choreTick(v,dt,t);
+  if(v.state==='idle'||v.state==='delivering')personalSpace(v,dt,0,0);}
  if(v.ears&&v.ears.length&&!reduce){if(v.earT==null)v.earT=1+rnd()*5;v.earT-=dt;if(v.earT<0){v.earT=2.5+rnd()*6;v.earTw=.4;v.earWho=Math.floor(rnd()*3);}
   if(v.earTw>0){v.earTw=Math.max(0,v.earTw-dt);const a=Math.sin((.4-v.earTw)/.4*Math.PI*2)*.28;v.ears.forEach((e,i)=>{e.g.rotation.z=e.base-e.s*((v.earWho===2||v.earWho===i)?a:0);});}}
  if(v.wings&&v.wings.length&&!reduce){const f=Math.sin(t*(v.path.length?14:3)+v.phase)*(v.path.length?.35:.12);v.wings.forEach(w=>{w.g.rotation.y=w.base+w.s*f;});}
@@ -1962,21 +2064,135 @@ const MEADOW={step:60/84/2,bars:[['D3','A3','D4','F#4'],['B2','F#3','B3','D4'],[
 MEADOW.melT=[];{let t=0;for(const [n,d] of MEADOW.mel){MEADOW.melT.push([t,n,d]);t+=d;}MEADOW.len=t;}
 // Prelude in C major, BWV 846 (J.S. Bach, 1722 — public domain), arranged for soft keys
 const BACH=['C4 E4 G4 C5 E5','C4 D4 A4 D5 F5','B3 D4 G4 D5 F5','C4 E4 G4 C5 E5','C4 E4 A4 E5 A5','C4 D4 F#4 A4 D5','B3 D4 G4 D5 G5','B3 C4 E4 G4 C5','A3 C4 E4 G4 C5','D3 A3 D4 F#4 C5','G3 B3 D4 G4 B4','G3 Bb3 E4 G4 C#5','F3 A3 D4 A4 D5','F3 Ab3 D4 F4 B4','E3 G3 C4 G4 C5','E3 F3 A3 C4 F4','D3 F3 A3 C4 F4','G2 D3 G3 B3 F4','C3 E3 G3 C4 E4','C3 G3 Bb3 C4 E4','F2 F3 A3 C4 E4','F#2 C3 A3 C4 Eb4','Ab2 F3 B3 C4 D4','G2 F3 G3 B3 D4','G2 E3 G3 C4 E4','G2 D3 G3 C4 F4','G2 D3 G3 B3 F4','C3 E3 G3 C4 E4'].map(s=>s.split(' ').map(NOTE));
-const TRACKS={brook:{name:'Brookside',sub:'birdsong & a little brook'},meadow:{name:'Meadow Waltz',sub:'harp & flute · original cottagecore tune'},bach:{name:'Prelude in C',sub:'J.S. Bach · public domain · soft keys'},off:{name:'No music',sub:'effects and idle sounds only'}};
-function startMusic(){stopMusic();const a=SND.ctx;if(!a||!SND.on)return;const tr=AV().track;SND.mus={tr,t:a.currentTime+.15,i:0,nodes:[]};
- if(tr==='brook'){const src=a.createBufferSource();const len=a.sampleRate*2,buf=a.createBuffer(1,len,a.sampleRate),d=buf.getChannelData(0);let last=0;for(let i=0;i<len;i++){last=(last+.02*(Math.random()*2-1))/1.02;d[i]=last*3.5;}
-  src.buffer=buf;src.loop=true;const lp=a.createBiquadFilter();lp.type='lowpass';lp.frequency.value=700;const g=a.createGain();g.gain.value=.06;src.connect(lp);lp.connect(g);g.connect(SND.bus.music);src.start();SND.mus.nodes.push(src);}}
-function stopMusic(){if(SND.mus){for(const n of SND.mus.nodes){try{n.stop();}catch(e){}}SND.mus=null;}}
-function scheduleMusic(){const m=SND.mus,a=SND.ctx;if(!m||!a)return;const ahead=a.currentTime+.5;
- if(m.tr==='meadow'){const st=MEADOW.step;while(m.t<ahead){const bar=Math.floor(m.i/6)%MEADOW.bars.length,b=m.i%6,ch=MEADOW.bars[bar].map(NOTE);
-   const arp=[ch[0],ch[1],ch[2],ch[3],ch[2],ch[1]];pluck(arp[b]*(b===3?1:1),m.t,b===0?.065:.045);if(b===0){tone(ch[0]/2,st*5.5,{type:'sine',vol:.05,when:m.t,bus:'music',attack:.02});}
-   if(m.i>=12){const beat=(m.i-12)%96;for(const [t0,n,d] of MEADOW.melT)if(t0===beat)flute(NOTE(n),m.t,d*st*.95);}
-   m.t+=st;m.i++;}}
- if(m.tr==='bach'){const st=.2;while(m.t<ahead){const bar=Math.floor(m.i/16)%BACH.length,b=m.i%16,c=BACH[bar];const pat=[0,1,2,3,4,2,3,4];const n=c[pat[b%8]];
-   piano(n,m.t,b%8===0?.06:.045,b%8<2?st*7:1.4);m.t+=st;m.i++;}}
- if(m.tr==='brook'){SND.birdT-=.016;}}
+/* ======================= music: three long arrangements (5+ minutes each), all synthesized in code, no audio files ======================= */
+const MIDI=n=>{const m=n.match(/^([A-G])([#b]?)(\d)$/);return {C:0,D:2,E:4,F:5,G:7,A:9,B:11}[m[1]]+(m[2]==='#'?1:m[2]==='b'?-1:0)+12*(+m[3]+1);};
+const HZ=m=>440*Math.pow(2,(m-69)/12);
+const SCALES={D:[2,4,6,7,9,11,1],G:[7,9,11,0,2,4,6]};
+function dia(m,steps,key){const sc=SCALES[key];let pc=((m%12)+12)%12,i=sc.indexOf(pc);if(i<0)return m+(steps<0?-3:3);let oct=Math.floor(m/12),k=i+steps;while(k<0){k+=7;oct--;}while(k>6){k-=7;oct++;}let r=sc[k]+oct*12;if(steps<0&&r>=m)r-=12;if(steps>0&&r<=m)r+=12;return r;}
+const CH={D:['D3','F#3','A3'],G:['G2','B2','D3'],A:['A2','C#3','E3'],Bm:['B2','D3','F#3'],Em:['E3','G3','B3'],C:['C3','E3','G3'],'F#m':['F#2','A2','C#3'],'F#':['F#2','A#2','C#3'],Am:['A2','C3','E3'],E:['E3','G#3','B3']};
+const mel=s=>s.trim().split(/\s+/).map(t=>{const [n,d]=t.split('/');return{n,d:+d||1};});
+const tune=rows=>rows.map(([c,m])=>({c,m:mel(m)}));
+// instruments
+function voice(f,t,d,{type='sine',vol=.04,att=.05,rel=.12,vib=0,vibD=0,cut=0,q=.7}={}){if(!SND.on||!SND.ctx)return;const a=SND.ctx,o=a.createOscillator(),g=a.createGain();o.type=type;o.frequency.setValueAtTime(f,t);let src=o;
+ if(vib){const l=a.createOscillator(),lg=a.createGain();l.frequency.value=vib;lg.gain.setValueAtTime(0,t);lg.gain.linearRampToValueAtTime(f*vibD,t+Math.min(.4,d*.6));l.connect(lg);lg.connect(o.frequency);l.start(t);l.stop(t+d+rel+.05);}
+ if(cut){const lp=a.createBiquadFilter();lp.type='lowpass';lp.frequency.value=cut;lp.Q.value=q;o.connect(lp);src=lp;}
+ g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(vol,t+att);g.gain.setValueAtTime(vol,t+Math.max(att+.01,d-rel*.3));g.gain.exponentialRampToValueAtTime(.0003,t+d+rel);src.connect(g);g.connect(SND.bus.music);o.start(t);o.stop(t+d+rel+.08);}
+const INST={
+ harp:(t,f,d,v)=>pluck(f,t,v,Math.max(1.2,d*1.4)),
+ whistle:(t,f,d,v)=>{voice(f,t,d,{type:'sine',vol:v,att:.025,rel:.07,vib:5.8,vibD:.006});voice(f*2,t,d,{type:'triangle',vol:v*.1,att:.03,rel:.06});noiseBurst(.045,{freq:Math.min(9000,f*2),q:2,type:'bandpass',vol:v*.35,bus:'music',when:t});},
+ fiddle:(t,f,d,v)=>{voice(f,t,d,{type:'sawtooth',vol:v,att:.08,rel:.16,vib:5.4,vibD:.005,cut:2400,q:.8});voice(f*1.004,t,d,{type:'sawtooth',vol:v*.45,att:.1,rel:.16,cut:1800});},
+ flute:(t,f,d,v)=>flute(f,t,d,v),
+ recorder:(t,f,d,v)=>{voice(f,t,d,{type:'triangle',vol:v,att:.03,rel:.06,vib:4.8,vibD:.004,cut:3000});noiseBurst(.04,{freq:f*1.5,q:3,type:'bandpass',vol:v*.2,bus:'music',when:t});},
+ piano:(t,f,d,v)=>piano(f,t,v,Math.max(1,d*1.6)),
+ strings:(t,f,d,v)=>{voice(f,t,d,{type:'sawtooth',vol:v,att:.35,rel:.5,vib:5,vibD:.004,cut:1500,q:.6});voice(f*.998,t,d,{type:'sawtooth',vol:v*.6,att:.4,rel:.5,cut:1200});},
+ drone:(t,f,d,v)=>voice(f,t,d,{type:'sawtooth',vol:v,att:1.6,rel:1.6,cut:520,q:.5,vib:.25,vibD:.0015}),
+ bass:(t,f,d,v)=>{tone(f,Math.min(d,2.6),{type:'sine',vol:v,when:t,bus:'music',attack:.02});tone(f*2,Math.min(d,1.4),{type:'triangle',vol:v*.25,when:t,bus:'music',attack:.01,filter:900});},
+ bodhran:(t,f,d,v)=>{tone(96,.3,{type:'sine',vol:.14*v,slide:.55,when:t,bus:'music',attack:.004});noiseBurst(.05,{freq:340,q:.7,type:'lowpass',vol:.05*v,bus:'music',when:t});},
+ tabor:(t,f,d,v)=>{noiseBurst(.07,{freq:2100,q:1.3,type:'bandpass',vol:.055*v,bus:'music',when:t});tone(230,.09,{vol:.035*v,when:t,bus:'music',slide:.7});}};
+// score builder: a list of timed note events; sections return their length in seconds
+function Score(){const ev=[];return{ev,add:(t,inst,m,d,v)=>ev.push({t,inst,f:m==null?0:HZ(m),d,v}),
+ melody(bars,t0,e,inst,{vol=.05,oct=0,leg=.92,harm=0,key='D',hvol=null,hinst=null}={}){let t=t0;for(const b of bars){for(const n of b.m){if(n.n!=='r'){const m=MIDI(n.n)+12*oct;this.add(t,inst,m,n.d*e*leg,vol);if(harm){this.add(t,hinst||inst,dia(m,harm,key),n.d*e*leg,hvol??vol*.6);}}t+=n.d*e;}}return t-t0;},
+ harp(bars,t0,e,meter,{vol=.045,pat=null,oct=0}={}){let t=t0;const P=pat||(meter===8?[0,1,2,3,4,3,2,1]:[0,1,2,3,2,1]);for(const b of bars){const c=CH[b.c].map(MIDI);const T=[c[0]+12*oct,c[2]+12*oct,c[0]+12+12*oct,c[1]+12+12*oct,c[2]+12+12*oct];
+  P.forEach((k,i)=>this.add(t+i*e*(meter/P.length),'harp',T[k],e*2,i===0?vol*1.3:vol));t+=meter*e;}return t-t0;},
+ bass(bars,t0,e,meter,{vol=.05}={}){let t=t0;for(const b of bars){this.add(t,'bass',MIDI(CH[b.c][0])-12,meter*e*.95,vol);t+=meter*e;}return t-t0;},
+ drums(bars,t0,e,inst,pat,{vol=1}={}){let t=t0;const meter=pat.len;for(const b of bars){for(const [p,a] of pat.hits)this.add(t+p*e,inst,null,.2,a*vol);t+=meter*e;}return t-t0;},
+ hold(t,inst,notes,d,v){for(const n of notes)this.add(t,inst,MIDI(n),d,v);return d;}};}
+const rep=(A,B)=>[...A,...A,...B,...B];
+const JIG_A=tune([['D','A4/2 D5/1 F#5/2 D5/1'],['G','G5/2 B5/1 A5/2 F#5/1'],['D','D5/2 F#5/1 A5/2 F#5/1'],['A','E5/2 C#5/1 A4/3'],['D','A4/2 D5/1 F#5/2 A5/1'],['G','B5/2 A5/1 G5/2 B5/1'],['A','A5/2 F#5/1 E5/2 C#5/1'],['D','D5/4 r/2']]);
+const JIG_B=tune([['D','F#5/2 A5/1 D6/2 A5/1'],['G','B5/2 G5/1 D6/2 B5/1'],['D','A5/2 F#5/1 A5/2 D6/1'],['A','C#6/2 B5/1 A5/3'],['Bm','B5/2 F#5/1 D5/2 F#5/1'],['G','G5/2 A5/1 B5/2 G5/1'],['A','A5/2 E5/1 C#5/2 E5/1'],['D','D5/4 r/2']]);
+const AIR=tune([['Em','E5/4 F#5/1 G5/1'],['D','A5/4 B5/2'],['Em','G5/3 F#5/1 E5/2'],['D','D5/6'],['C','E5/4 G5/2'],['D','F#5/3 E5/1 D5/2'],['Em','E5/2 B4/2 D5/2'],['Em','E5/6'],
+ ['G','G5/4 A5/2'],['D','B5/4 A5/2'],['C','G5/3 A5/1 B5/2'],['D','A5/6'],['Em','B5/4 A5/1 G5/1'],['D','F#5/3 E5/1 D5/2'],['C','E5/2 G5/2 F#5/2'],['Em','E5/6']]);
+const REEL_A=tune([['G','G4/1 B4/1 D5/1 B4/1 G5/1 D5/1 B4/1 D5/1'],['C','E5/1 C5/1 G4/1 C5/1 E5/1 G5/1 E5/1 C5/1'],['G','D5/1 B4/1 G4/1 B4/1 D5/1 G5/1 B5/1 G5/1'],['D','A5/1 F#5/1 D5/1 F#5/1 A5/1 D5/1 F#5/1 A5/1'],
+ ['G','B5/1 G5/1 D5/1 G5/1 B5/1 D6/1 B5/1 G5/1'],['C','C6/1 G5/1 E5/1 G5/1 C6/1 E6/1 C6/1 G5/1'],['D','A5/1 B5/1 C6/1 A5/1 F#5/1 D5/1 E5/1 F#5/1'],['G','G5/2 D5/1 B4/1 G4/4']]);
+const REEL_B=tune([['Em','E5/1 G5/1 B5/1 G5/1 E5/1 G5/1 B5/1 E6/1'],['D','D6/1 A5/1 F#5/1 A5/1 D6/1 A5/1 F#5/1 D5/1'],['C','E5/1 G5/1 C6/1 G5/1 E5/1 C6/1 E6/1 C6/1'],['D','D6/1 C6/1 B5/1 A5/1 G5/1 F#5/1 E5/1 D5/1'],
+ ['Em','E5/1 B4/1 E5/1 G5/1 B5/1 G5/1 E5/1 G5/1'],['C','C6/1 G5/1 E5/1 G5/1 C6/1 B5/1 A5/1 G5/1'],['D','F#5/1 A5/1 D6/1 C6/1 B5/1 A5/1 G5/1 F#5/1'],['G','G5/4 r/4']]);
+const EST_A=tune([['Am','A4/2 B4/1 C5/2 D5/1'],['G','E5/2 D5/1 C5/2 B4/1'],['Am','A4/2 C5/1 E5/2 A5/1'],['G','G5/3 D5/3'],['Am','E5/2 F#5/1 G5/2 E5/1'],['D','F#5/2 E5/1 D5/2 F#5/1'],['Em','E5/2 D5/1 B4/2 G4/1'],['Am','A4/6']]);
+const EST_B=tune([['C','C5/2 E5/1 G5/2 E5/1'],['G','D5/2 G5/1 B5/2 G5/1'],['Am','A5/2 G5/1 E5/2 C5/1'],['D','D5/2 F#5/1 A5/3'],['Am','C6/2 B5/1 A5/2 E5/1'],['G','G5/2 E5/1 D5/2 B4/1'],['Em','E5/2 G5/1 B4/2 D5/1'],['Am','A4/6']]);
+const J68={len:6,hits:[[0,1],[2,.35],[3,.8],[5,.35]]},J68L={len:6,hits:[[0,.9],[3,.6]]},R44={len:8,hits:[[0,1],[2,.45],[3,.25],[4,.85],[6,.45],[7,.3]]},T68={len:6,hits:[[0,1],[3,.65],[5,.35]]};
+function buildCeltic(){const S=Score();let t=.2;
+ // intro: harp alone, the drone breathes in
+ const intro=tune([['D',''],['G',''],['D',''],['A',''],['D',''],['G',''],['A',''],['D','']].map(([c])=>[c,'r/6']));
+ const ej=.19,jigLen=32*6*ej;S.add(t,'drone',MIDI('D2'),8*6*ej+jigLen*2,.016);S.add(t,'drone',MIDI('A2'),8*6*ej+jigLen*2,.011);
+ t+=S.harp(intro,t,ej,6,{vol:.05});
+ const J=rep(JIG_A,JIG_B);S.harp(J,t,ej,6);S.bass(J,t,ej,6,{vol:.045});S.drums(J,t,ej,'bodhran',J68L,{vol:.8});t+=S.melody(J,t,ej,'whistle',{vol:.05});
+ S.harp(J,t,ej,6);S.bass(J,t,ej,6,{vol:.045});S.drums(J,t,ej,'bodhran',J68);S.melody(J,t,ej,'fiddle',{vol:.034,oct:-1});t+=S.melody(J,t,ej,'whistle',{vol:.045,harm:-2,hvol:.026,key:'D'});
+ // slow air in E dorian
+ const ea=.42,airLen=16*6*ea;S.add(t,'drone',MIDI('E2'),airLen*2+1,.014);S.add(t,'drone',MIDI('B2'),airLen*2+1,.009);
+ S.harp(AIR,t,ea,6,{vol:.04});S.bass(AIR,t,ea,6,{vol:.04});t+=S.melody(AIR,t,ea,'fiddle',{vol:.036,leg:.98});
+ S.harp(AIR,t,ea,6,{vol:.04,pat:[0,1,2,3,4,3]});S.bass(AIR,t,ea,6,{vol:.04});t+=S.melody(AIR,t,ea,'whistle',{vol:.045,leg:.97,harm:-2,hinst:'fiddle',hvol:.022,key:'D'});
+ t+=.6;
+ // reel in G, twice through
+ const er=.25,R=rep(REEL_A,REEL_B);for(let k=0;k<2;k++){S.harp(R,t,er,8,{vol:.035,pat:[0,2,1,3]});S.bass(R,t,er,8,{vol:.045});S.drums(R,t,er,'bodhran',R44,{vol:k?1:.8});
+  if(k)S.melody(R,t,er,'fiddle',{vol:.03,oct:-1});t+=S.melody(R,t,er,'whistle',{vol:.044,leg:.85,harm:k?-2:0,hvol:.024,key:'G'});}
+ t+=.5;
+ // faire dance: recorder, tabor and drone in A dorian
+ const ee=.2,E=rep(EST_A,EST_B),eLen=32*6*ee;S.add(t,'drone',MIDI('A2'),eLen*2+.5,.017);S.add(t,'drone',MIDI('E3'),eLen*2+.5,.011);
+ for(let k=0;k<2;k++){S.harp(E,t,ee,6,{vol:.035});S.drums(E,t,ee,'tabor',T68);if(k)S.melody(E,t,ee,'fiddle',{vol:.028,harm:-2,key:'G',hvol:.02});t+=S.melody(E,t,ee,'recorder',{vol:.05,leg:.9});}
+ t+=.4;
+ // reprise of the jig's A part, then a last chord
+ S.add(t,'drone',MIDI('D2'),8*6*ej+4,.014);S.harp(JIG_A,t,ej,6);S.bass(JIG_A,t,ej,6,{vol:.045});S.drums(JIG_A,t,ej,'bodhran',J68);S.melody(JIG_A,t,ej,'fiddle',{vol:.03,oct:-1});t+=S.melody(JIG_A,t,ej,'whistle',{vol:.05});
+ ['D3','A3','D4','F#4','A4','D5'].forEach((n,i)=>S.add(t+i*.06,'harp',MIDI(n),3,.05));S.add(t,'whistle',MIDI('D5'),2.6,.04);t+=5;
+ return{ev:S.ev.sort((a,b)=>a.t-b.t),len:t};}
+// Meadow Waltz: the original tune plus two new strains, ~5½ minutes
+const WALTZ_A=(()=>{const bars=[];let cur=[],acc=0,i=0;const flat=MEADOW.mel.map(([n,d])=>({n,d}));for(const n of flat){cur.push(n);acc+=n.d;if(acc>=6){bars.push({c:['D','Bm','G','A','D','F#m','G','A','G','A','F#m','Bm','Em','A','D','D'][i++%16],m:cur});cur=[];acc=0;}}if(cur.length)bars.push({c:'D',m:cur});return bars.slice(0,16);})();
+const WALTZ_B=tune([['G','B5/4 A5/2'],['D','F#5/4 D5/2'],['Em','G5/3 F#5/1 E5/2'],['Bm','F#5/4 D5/2'],['G','B4/2 D5/2 G5/2'],['D','A5/3 G5/1 F#5/2'],['Em','G5/2 E5/2 B4/2'],['A','C#5/6'],
+ ['G','D5/2 G5/2 B5/2'],['F#m','A5/4 F#5/2'],['Bm','B5/3 A5/1 F#5/2'],['G','G5/4 B4/2'],['Em','E5/2 G5/2 B5/2'],['A','A5/3 G5/1 E5/2'],['D','F#5/3 E5/1 D5/2'],['D','D5/6']]);
+const WALTZ_C=tune([['Bm','F#5/4 E5/1 D5/1'],['F#m','C#5/4 A4/2'],['G','B4/2 D5/2 G5/2'],['D','F#5/6'],['Em','G5/3 F#5/1 E5/2'],['Bm','D5/3 C#5/1 B4/2'],['A','C#5/2 E5/2 A5/2'],['F#','F#5/4 E5/2'],
+ ['Bm','D5/2 F#5/2 B5/2'],['A','C#6/4 A5/2'],['G','B5/3 A5/1 G5/2'],['D','F#5/3 E5/1 D5/2'],['Em','E5/2 G5/2 B5/2'],['F#','F#5/2 A#5/2 C#6/2'],['Bm','B5/4 F#5/2'],['A','E5/6']]);
+function buildWaltz(){const S=Score();let t=.2;const e=60/80/2;const W=[0,1,2,3,2,1];
+ const intro=tune([['D','r/6'],['G','r/6'],['D','r/6'],['A','r/6'],['D','r/6'],['G','r/6'],['A','r/6'],['D','r/6']]);
+ const sec=(bars,lead,o={})=>{S.harp(bars,t,e,6,{vol:.045,pat:o.pat||W});S.bass(bars,t,e,6,{vol:.05});if(o.under)S.melody(bars,t,e,o.under,{vol:.02,oct:-1,leg:.98});t+=lead?S.melody(bars,t,e,lead,{vol:o.vol||.05,leg:.95,harm:o.harm||0,hinst:o.hinst,hvol:o.hvol,key:'D'}):bars.length*6*e;};
+ sec(intro,null);sec(WALTZ_A,'flute');sec(WALTZ_A,'flute',{harm:-2,hinst:'flute',hvol:.025,pat:[0,2,3,4,3,2]});sec(WALTZ_B,'flute');
+ sec(intro.slice(0,4),null);sec(WALTZ_C,'fiddle',{vol:.036});sec(WALTZ_C,'flute',{harm:-2,hinst:'fiddle',hvol:.018});sec(WALTZ_A,'flute',{under:'strings'});sec(WALTZ_B,'flute',{harm:-2,hinst:'fiddle',hvol:.018});sec(WALTZ_A,'flute',{harm:-2,hinst:'flute',hvol:.022});
+ sec(tune([['G','r/6'],['A','r/6'],['D','r/6'],['D','r/6']]),null);['D3','A3','D4','F#4','A4'].forEach((n,i)=>S.add(t+i*.07,'harp',MIDI(n),3,.05));S.add(t,'flute',MIDI('D5'),3,.04);t+=5;
+ return{ev:S.ev.sort((a,b)=>a.t-b.t),len:t};}
+// Classical Garden: Bach Prelude in C (BWV 846), Bach/Petzold Minuet in G (BWV Anh. 114), Pachelbel's Canon in D with variations — all public domain
+const MIN_A1=['D5/2 G4/1 A4/1 B4/1 C5/1','D5/2 G4/2 G4/2','E5/2 C5/1 D5/1 E5/1 F#5/1','G5/2 G4/2 G4/2','C5/2 D5/1 C5/1 B4/1 A4/1','B4/2 C5/1 B4/1 A4/1 G4/1','F#4/2 G4/1 A4/1 B4/1 G4/1','A4/6'];
+const MIN_A2=[...MIN_A1.slice(0,6),'A4/2 B4/1 A4/1 G4/1 F#4/1','G4/6'];
+const MIN_B1=['B5/2 G5/1 A5/1 B5/1 G5/1','A5/2 D5/1 E5/1 F#5/1 D5/1','G5/2 E5/1 F#5/1 G5/1 D5/1','C#5/2 B4/1 C#5/1 A4/2','A4/1 B4/1 C#5/1 D5/1 E5/1 F#5/1','G5/2 F#5/2 E5/2','F#5/2 A4/2 C#5/2','D5/6'];
+const MIN_B2=['D5/2 G4/1 F#4/1 G4/2','E5/2 G4/1 F#4/1 G4/2','D5/2 C5/2 B4/2','A4/1 G4/1 F#4/1 G4/1 A4/2','D4/1 E4/1 F#4/1 G4/1 A4/1 B4/1','C5/2 B4/2 A4/2','B4/1 D5/1 G4/2 F#4/2','G4/6'];
+const MIN_BASS={A1:['G3','B3','C4','B3','A3','G3','D4','D3'],A2:['G3','B3','C4','B3','A3','G3','D3','G2'],B1:['G3','F#3','E3','A3','A2','B2','A2','D3'],B2:['B3','C4','B3','A3','D3','E3','D3','G2']};
+function buildClassical(){const S=Score();let t=.3;
+ // Prelude: the broken-chord figure, two times per bar
+ const st=.19;for(const c of BACH){const m=c.map(f=>Math.round(69+12*Math.log2(f/440)));const pat=[0,1,2,3,4,2,3,4];for(let r=0;r<2;r++)pat.forEach((k,i)=>{const tt=t+(r*8+i)*st;S.add(tt,'piano',m[k],i<2?st*7:st*3,i===0?.085:.062);});t+=16*st;}
+ ['C3','G3','C4','E4','G4','C5'].forEach((n,i)=>S.add(t+i*.05,'piano',MIDI(n),4,.07));t+=4.5;
+ // Minuet in G with repeats
+ const q=.26,rows=a=>a.map(m=>({c:'G',m:mel(m)}));const lh=(names,t0)=>names.forEach((n,i)=>S.add(t0+i*6*q,'piano',MIDI(n),6*q*.95,.055));
+ for(const [A,B,ka,kb] of [[MIN_A1,MIN_A2,'A1','A2'],[MIN_B1,MIN_B2,'B1','B2']])for(let r=0;r<2;r++){lh(MIN_BASS[ka],t);t+=S.melody(rows(A),t,q,'piano',{vol:.08,leg:.9});lh(MIN_BASS[kb],t);t+=S.melody(rows(B),t,q,'piano',{vol:.08,leg:.9});}
+ t+=1.2;
+ // Canon in D: ground bass, then voices entering two bars apart over it
+ const e=.3,ground=['D3','A2','B2','F#2','G2','D2','G2','A2'],chords=['D','A','Bm','F#m','G','D','G','A'];
+ const tri=c=>CH[c].map(MIDI);const up=(c,o)=>{const x=tri(c);return[x[0]+o,x[1]+o,x[2]+o,x[0]+12+o];};
+ const L=[ // each line spans one cycle: 8 chords x 4 eighths
+  ['F#5','E5','D5','C#5','B4','A4','B4','C#5'].map(n=>[[MIDI(n),4]]),
+  ['D5','C#5','B4','A4','G4','F#4','G4','E4'].map(n=>[[MIDI(n),4]]),
+  [['D4','F#4'],['A4','G4'],['F#4','D4'],['F#4','E4'],['D4','B3'],['D4','A4'],['G4','B4'],['A4','G4']].map(p=>p.map(n=>[MIDI(n),2])),
+  chords.map(c=>up(c,24).map(m=>[m,1])),
+  chords.map(c=>{const x=up(c,24);return[[x[3],1],[x[2],1],[x[1],1],[x[0],1]];}),
+  chords.map(c=>{const x=tri(c)[1]+24;return[[x,1],[dia(x,1,'D'),1],[x,1],[dia(x,-1,'D'),1]];}),
+  chords.map(c=>[[tri(c)[2]+24,2],[tri(c)[1]+24,2]]),
+  chords.map(c=>{const x=tri(c)[0]+24;return[[x,1],[dia(x,1,'D'),1],[dia(x,2,'D'),1],[dia(x,3,'D'),1]];}),
+  chords.map(c=>[[tri(c)[1]+24,3],[tri(c)[2]+24,1]]),
+  chords.map(c=>[[tri(c)[0]+36,4]])];
+ const cycles=14,cyc=8*4*e;
+ for(let k=0;k<cycles;k++){const t0=t+k*cyc;ground.forEach((n,i)=>S.add(t0+i*4*e,'bass',MIDI(n),4*e*.95,.065));
+  if(k>=1)chords.forEach((c,i)=>S.add(t0+i*4*e,'strings',tri(c)[1]+12,4*e,.012));
+  if(k>=1&&k<cycles-1)chords.forEach((c,i)=>up(c,12).forEach((m,j)=>S.add(t0+i*4*e+j*e,'harp',m,e*2,.034)));
+  [[2,'fiddle',.04],[3,'fiddle',.03],[4,'flute',.042]].forEach(([d,inst,v])=>{const li=k-d;if(li<0)return;const line=L[li<L.length?li:3+((li-L.length)%(L.length-3))];let tt=t0;for(const seg of line)for(const [m,dd] of seg){S.add(tt,inst,m,dd*e*.95,v);tt+=dd*e;}});}
+ t+=cycles*cyc;['D3','A3','D4','F#4','A4','D5'].forEach((n,i)=>S.add(t+i*.05,'strings',MIDI(n),3.5,.014));S.add(t,'bass',MIDI('D2'),3,.05);t+=5;
+ return{ev:S.ev.sort((a,b)=>a.t-b.t),len:t};}
+const SCORES={};const scoreFor=tr=>SCORES[tr]||(SCORES[tr]=tr==='brook'?buildCeltic():tr==='meadow'?buildWaltz():tr==='bach'?buildClassical():{ev:[],len:1});
+const TRACKS={brook:{name:'Hollowbrook Fair',sub:'Celtic & faire tunes · whistle, fiddle, harp, bodhrán'},meadow:{name:'Meadow Waltz',sub:'harp, flute & fiddle · original'},bach:{name:'Classical Garden',sub:'Bach, Minuet in G, Pachelbel · public domain'},off:{name:'No music',sub:'idle sounds only'}};
+function startMusic(){stopMusic();const a=SND.ctx;if(!a||!SND.on)return;const tr=AV().track;if(tr==='off')return;const sc=scoreFor(tr);SND.mus={tr,sc,t0:a.currentTime+.2,k:0,nodes:[]};}
+function stopMusic(){if(SND.mus){SND.mus=null;}if(SND.bus&&SND.bus.music&&SND.ctx){const g=SND.bus.music.gain,now=SND.ctx.currentTime;try{g.cancelScheduledValues(now);g.setValueAtTime(0,now);g.setValueAtTime(AV().musicVol/100,now+.25);}catch(e){}}}
+function scheduleMusic(){const m=SND.mus,a=SND.ctx;if(!m||!a)return;const ahead=a.currentTime+.6,ev=m.sc.ev;
+ for(let guard=0;guard<400;guard++){if(m.k>=ev.length){m.t0+=m.sc.len;m.k=0;}const e=ev[m.k];const at=m.t0+e.t;if(at>ahead)break;if(at>=a.currentTime-.05)INST[e.inst](at,e.f,e.d,e.v);m.k++;}}
+
 function ambientTick(dt){SND.idleBudget=Math.max(0,SND.idleBudget-dt*14);if(!SND.on||S.mode==='focus'||!SND.ctx)return;scheduleMusic();
- if(SND.mus&&SND.mus.tr==='brook'){SND.birdT-=dt;if(SND.birdT<=0){SND.birdT=6+Math.random()*9;if(SUN.night>.5){tone(420,.35,{vol:.03,slide:.9,bus:'music'});tone(420,.35,{vol:.03,slide:.9,at:.5,bus:'music'});}else{const f=2200+Math.random()*900;for(let i=0;i<3;i++)tone(f*(1+i*.06),.08,{vol:.025,slide:1.35,at:i*.12,bus:'music'});}}}
+ // birdsong by day, crickets and the odd owl at night: idle sounds, whatever music is playing
+ if(!SET.gameMode){SND.birdT-=dt;if(SND.birdT<=0){if(SUN.night>.5){SND.birdT=1.6+Math.random()*2.5;const f=4300+Math.random()*500;for(let i=0;i<3;i++)tone(f,.04,{vol:.012,at:i*.07,bus:'idle',attack:.004});if(Math.random()<.12){tone(400,.4,{vol:.03,slide:.88,bus:'idle'});tone(380,.5,{vol:.03,slide:.88,at:.55,bus:'idle'});}}
+  else{SND.birdT=3+Math.random()*7;const f=2100+Math.random()*1200,n=2+Math.floor(Math.random()*4),sl=Math.random()<.5?1.35:.8;for(let i=0;i<n;i++)tone(f*(1+i*.05),.07+Math.random()*.05,{vol:.022,slide:sl,at:i*(.1+Math.random()*.05),bus:'idle'});
+   if(Math.random()<.3){const g=1500+Math.random()*500;tone(g,.25,{vol:.016,slide:1.25,at:.7,bus:'idle'});tone(g*1.2,.3,{vol:.016,slide:.85,at:1.0,bus:'idle'});}}}}
  // waterfalls + river murmur, louder when you look nearby
  if(!SND.fall){const a=SND.ctx,src=a.createBufferSource();src.buffer=SND.noise;src.loop=true;const bp=a.createBiquadFilter();bp.type='bandpass';bp.frequency.value=850;bp.Q.value=.6;const g=a.createGain();g.gain.value=0;src.connect(bp);bp.connect(g);g.connect(SND.bus.idle);src.start();SND.fall={src,g};}
  const near=Math.max(hearAt(-6.2,-10.4),hearAt(13.6,-11),hearAt(14.2,Math.max(-10,Math.min(11,CAM.target.z)))*.5);SND.fall.g.gain.value+=(Math.min(.09,near*.11)*(SET.gameMode?0:1)-SND.fall.g.gain.value)*Math.min(1,dt*3);}

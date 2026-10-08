@@ -1,5 +1,6 @@
 // Hollowbrook desktop shell (Windows). Loads the bundled village from inside the app
-// over a private app:// scheme and refuses every network request, so it runs fully offline.
+// over a private app:// scheme and refuses every network request except Ollama on this same PC
+// (http://127.0.0.1:11434), so it never reaches the internet.
 const { app, BrowserWindow, protocol, net, session, shell, ipcMain, Menu } = require('electron');
 const path = require('path');
 const { pathToFileURL } = require('url');
@@ -40,7 +41,8 @@ app.whenReady().then(() => {
   });
   // offline lock: anything that isn't app:// (or an inline data/blob URL) is cancelled
   session.defaultSession.webRequest.onBeforeRequest((d, cb) => {
-    const ok = /^(app|data|blob|devtools):/.test(d.url) || d.url.startsWith(WEB_URL);
+    // the only non-app address allowed is Ollama on this same PC (loopback), for villager conversations
+    const ok = /^(app|data|blob|devtools):/.test(d.url) || d.url.startsWith(WEB_URL) || /^http:\/\/(127\.0\.0\.1|localhost):11434\//.test(d.url);
     cb({ cancel: !ok });
   });
   session.defaultSession.setPermissionRequestHandler((wc, perm, cb) => cb(false));

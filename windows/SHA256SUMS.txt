@@ -1,1 +1,1 @@
-1f4acc418fdfd8bbbb7fb6d1bf052cac2b6f8b4f28fe86de84454e6146f9be49  Hollowbrook-0.7.0-portable.exe
+41ca7365af52fcf92408da1cef09be726a94a97b8fd0beca32e35dad48c10595  Hollowbrook-0.8.0-portable.exe

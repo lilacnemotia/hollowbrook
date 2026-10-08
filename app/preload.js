@@ -1,6 +1,6 @@
 // Wires the village's own title bar (drawn in the page) to the real window controls.
 const { contextBridge, ipcRenderer } = require('electron');
-contextBridge.exposeInMainWorld('hbDesktop', { version: '0.7.0' });
+contextBridge.exposeInMainWorld('hbDesktop', { version: '0.8.0' });
 window.addEventListener('DOMContentLoaded', () => {
   document.documentElement.classList.add('desktop-app');
   const st = document.createElement('style');
@@ -20,5 +20,5 @@ window.addEventListener('DOMContentLoaded', () => {
     if (tb) tb.addEventListener('dblclick', (e) => { if (!e.target.closest('.winctl')) ipcRenderer.send('win', 'max'); });
   }
   const sub = document.querySelector('.titlebar .tb-sub');
-  if (sub) sub.textContent = '· v0.7 mockup · sample data';
+  if (sub) sub.textContent = '· v0.8 mockup · sample data';
 });
